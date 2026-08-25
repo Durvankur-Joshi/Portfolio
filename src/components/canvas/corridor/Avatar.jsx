@@ -42,7 +42,7 @@ const Avatar = ({ position = [10, -20, 30] }) => {
 
         if (textures[0] && textures[0].image) {
             const aspectRatio = textures[0].image.width / textures[0].image.height;
-            const baseHeight = 2.3; // Fixed size
+            const baseHeight = 2.8; // Fixed size
             setDimensions({
                 width: baseHeight * aspectRatio,
                 height: baseHeight
@@ -53,7 +53,7 @@ const Avatar = ({ position = [10, -20, 30] }) => {
         // to prevent React from overwriting our useFrame mutations
         if (meshRef.current && textures[currentFrame.current]) {
             meshRef.current.material.map = textures[currentFrame.current];
-            meshRef.current.material.needsUpdate = true;
+            meshRef.current.material.needsUpda = true;
         }
     }, [textures]);
 

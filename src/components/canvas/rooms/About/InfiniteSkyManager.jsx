@@ -276,7 +276,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
 
     // Calculate aspect ratio
     // LEGACY FIX: Use original dimensions (2816x1536) to prevent stretching
-    const legacyAspectRatio = 2816 / 1536; 
+    const legacyAspectRatio = 2816 / 1536;
     const avatarWidth = 6; // Zwiększony rozmiar awatara na chmurce
     const avatarHeight = avatarWidth / legacyAspectRatio;
 
@@ -365,7 +365,7 @@ const IntroMilestone = ({ z, scrollProgressRef }) => {
                 anchorY="middle"
                 font="/fonts/CabinSketch-Regular.ttf"
             >
-                (ITOM)
+                (DURVANKUR)
             </Text>
 
             {/* Avatar on cloud - floating + spreads up-left */}
@@ -1042,7 +1042,7 @@ const SkillBalloon = ({ config, revealFactorRef, spreadFactorRef, timeRef }) => 
         'GSAPduzybalon.webp': 1.0, // GSAP balloon is square
         'default_small_medium': 631 / 1482 // Common ratio for others
     };
-    
+
     const filename = config.texture.split('/').pop();
     const aspect = legacyAspects[filename] || legacyAspects['default_small_medium'];
     const baseHeight = SIZE_MULTIPLIERS[config.size];

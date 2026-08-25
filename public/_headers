@@ -1,33 +1,33 @@
-https://portfolio-itom.pages.dev/*
+https://portfolio-DURVANKUR.pages.dev/*
   X-Robots-Tag: noindex
 
-https://itomdev.com/*
+https://DURVANKURdev.com/*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 # Cache static assets for 1 year (Performance & SEO Server Score)
-https://itomdev.com/*.js
+https://DURVANKURdev.com/*.js
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.css
+https://DURVANKURdev.com/*.css
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.webp
+https://DURVANKURdev.com/*.webp
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.png
+https://DURVANKURdev.com/*.png
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.ktx2
+https://DURVANKURdev.com/*.ktx2
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.glb
+https://DURVANKURdev.com/*.glb
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/*.mp3
+https://DURVANKURdev.com/*.mp3
   Cache-Control: public, max-age=31536000, immutable
 
-https://itomdev.com/fonts/*
+https://DURVANKURdev.com/fonts/*
   Cache-Control: public, max-age=31536000, immutable

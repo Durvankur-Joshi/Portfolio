@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const FILE_PATH = 'c:/Users/tomsz/Desktop/portfolio/portfolio-itom/src/components/canvas/rooms/About/InfiniteSkyManager.jsx';
+const FILE_PATH = 'c:/Users/tomsz/Desktop/portfolio/portfolio-DURVANKUR/src/components/canvas/rooms/About/InfiniteSkyManager.jsx';
 let content = fs.readFileSync(FILE_PATH, 'utf8');
 
 // ==== 1. Fix AwardButton ====

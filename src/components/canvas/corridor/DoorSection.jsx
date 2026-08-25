@@ -41,6 +41,7 @@ const DOOR_ALIGN_X = 1.2;
 
 // Door texture mapping - maps label to texture file
 const DOOR_TEXTURES = {
+    'THE PROJECTS': '/textures/corridor/doors/drzwiprojekty.webp',
     'THE GALLERY': '/textures/corridor/doors/drzwiprojekty.webp',
     'THE STUDIO': '/textures/corridor/doors/drzwisocial.webp',
     'THE ABOUT': '/textures/corridor/doors/drzwiabout.webp',
@@ -49,6 +50,7 @@ const DOOR_TEXTURES = {
 
 // Painted (colored) variants for brush-stroke reveal on hover
 const DOOR_PAINTED_TEXTURES = {
+    'THE PROJECTS': '/textures/corridor/doors/drzwiprojekty_painted.webp',
     'THE GALLERY': '/textures/corridor/doors/drzwiprojekty_painted.webp',
     'THE STUDIO': '/textures/corridor/doors/drzwisocial_painted.webp',
     'THE ABOUT': '/textures/corridor/doors/drzwiabout_painted.webp',
@@ -123,7 +125,7 @@ const DoorSection = ({
         if (roomId) return roomId;
 
         // Fallback for older code
-        if (label === 'THE GALLERY') return 'gallery';
+        if (label === 'THE PROJECTS' || label === 'THE GALLERY') return 'gallery';
         if (label === 'THE STUDIO') return 'studio';
         if (label === 'THE ABOUT') return 'about';
         if (label === "LET'S CONNECT") return 'contact';
@@ -827,7 +829,7 @@ const DoorSection = ({
         if (hoverAudioRef.current && !isHovered) {
             const vol = isMuted ? 0 : DOOR_AUDIO_SETTINGS.hoverVolume * globalVolume;
             hoverAudioRef.current.setVolume(vol);
-            
+
             // Only play if AudioContext is already running to avoid console warnings
             // Browsers block audio until a user click, and hover is not always enough.
             if (hoverAudioRef.current.isPlaying) hoverAudioRef.current.stop();
@@ -1069,7 +1071,7 @@ const DoorSection = ({
                         </mesh>
 
                         {/* === DYNAMIC TEXT FOR SIGNS === */}
-                        {label === 'THE GALLERY' && (
+                        {(label === 'THE PROJECTS' || label === 'THE GALLERY') && (
                             <group position={[0, 0, 0.01]}>
                                 <Text
                                     font="/fonts/CabinSketch-Bold.ttf"
@@ -1083,13 +1085,14 @@ const DoorSection = ({
                                 </Text>
                                 <Text
                                     font="/fonts/CabinSketch-Bold.ttf"
-                                    fontSize={0.25}
+                                    fontSize={0.21}
                                     color="#111111"
                                     anchorX="center"
                                     anchorY="top"
                                     position={[0, +0.02, 0]}
+                                    letterSpacing={-0.02}
                                 >
-                                    GALLERY
+                                    PROJECTS
                                 </Text>
                             </group>
                         )}

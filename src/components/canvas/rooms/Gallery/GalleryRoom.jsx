@@ -13,6 +13,7 @@ import GalleryClouds from './GalleryClouds';
 import { useAudio } from '../../../../context/AudioManager';
 import { usePaintMaterial } from './usePaintMaterial';
 import { useGalleryProjects } from '../../../../hooks/useSanityData';
+import { DURVANKUR_PROJECTS } from '../../../../data/projectsData';
 
 // Reusable Vector3 to avoid allocations in useFrame
 const _tempScale = new THREE.Vector3();
@@ -34,44 +35,7 @@ export const GALLERY_INTERACTION_AUDIO_SETTINGS = {
 };
 
 // Define the unique projects and their textures
-const FALLBACK_PROJECTS = [
-    {
-        id: 'monetune',
-        title: 'MONETUNE',
-        front: '/textures/gallery/monetuneprzod.webp',
-        painted: '/textures/gallery/monetuneprzod_painted.webp',
-        url: 'https://monetune.pl',
-        description: 'MoneTune is a step-by-step blueprint that teaches beginners how to generate passive income using AI-created music. Without any musical skills, you will learn how to easily produce professional tracks, publish them on platforms like Spotify, and monetize your digital assets.',
-        techStack: ['/textures/gallery/wordpresslogo.webp', '/textures/gallery/elementorlogo.webp', '/textures/gallery/phplogo.webp', '/textures/gallery/csslogo.webp']
-    },
-    {
-        id: 'timber',
-        title: 'TIMBERKITTY',
-        front: '/textures/gallery/timberkittyprzod.webp',
-        painted: '/textures/gallery/timberkittyprzod_painted.webp',
-        url: 'https://timberkitty.netlify.app',
-        description: 'TimberKitty is an addictive, free-to-play browser arcade game built in pure JavaScript. Players control a lumberjack cat to chop wood, save birds, complete daily missions, and compete on global leaderboards.',
-        techStack: ['/textures/gallery/jslogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/firebaselogo.webp']
-    },
-    {
-        id: 'young',
-        title: 'YOUNG MULTI',
-        front: '/textures/gallery/youngmultiprzod.webp',
-        painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://young-multi-strona.netlify.app',
-        description: 'A sleek, modern concept website dedicated to the Polish rapper and creator Young Multi. It serves as a promotional landing page designed to highlight his personal brand, music, and online presence.',
-        techStack: ['/textures/gallery/reactlogo.webp', '/textures/gallery/tailwindlogo.webp', '/textures/gallery/htmllogo.webp', '/textures/gallery/netlifylogo.webp']
-    },
-    {
-        id: 'bio',
-        title: 'BIO',
-        front: '/textures/gallery/bioprzod.webp',
-        painted: '/textures/gallery/bioprzod_painted.webp',
-        url: 'https://tomkingbio.netlify.app',
-        description: 'A fast, modern personal bio page serving as a central hub for my digital footprint. It showcases my latest coding projects, web development services, YouTube videos, and recommended music artists.',
-        techStack: ['/textures/gallery/htmllogo.webp', '/textures/gallery/csslogo.webp', '/textures/gallery/jslogo.webp', '/textures/gallery/netlifylogo.webp']
-    },
-];
+const FALLBACK_PROJECTS = DURVANKUR_PROJECTS;
 
 const PROJECT_COUNT = 10; // Keep the count for the infinite scroll feel
 const GAP = 2.5;
@@ -114,10 +78,10 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
     // Setup Paint Transition
     const { onBeforeCompile, animatePaint, resetPaint, uniformsData, updateRoomOrigin } = usePaintMaterial();
-    
+
     // Track transition state to disable interactions
     const [isTransitioning, setIsTransitioning] = useState(false);
-    
+
     // Track if user teleported into this room 
     const wasTeleportedRef = useRef(false);
     useEffect(() => {
@@ -137,7 +101,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 resetPaint();
                 // Start the paint animation with a slight delay so it happens *during* fly-in
                 animatePaint(0.2, 2.5);
-                
+
                 // Re-enable interactions once painting finishes
                 setTimeout(() => {
                     setIsTransitioning(false);
@@ -245,7 +209,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             return `/textures/gallery/${name}_painted.webp`;
         });
     }, [canHover]);
-    
+
     useTexture(allLogos);
 
     // Construct the full list of projects (repeated) with textures attached
@@ -390,7 +354,7 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         floorMat.onBeforeCompile = onBeforeCompile;
         floorMat.transparent = true;
         floorMat.needsUpdate = true;
-        
+
         const ropeMat = new THREE.MeshBasicMaterial({ color: '#666666' });
         ropeMat.onBeforeCompile = onBeforeCompile;
         ropeMat.transparent = true;
@@ -951,7 +915,7 @@ const ProjectCard = memo(forwardRef(({ index, project, clothespinTexture, curren
             const p = paintProgress.value;
             // Instantly reveal if we teleported
             const expectedOpacity = p >= 1.0 ? 1.0 : THREE.MathUtils.clamp((p - 0.3) * 2.0, 0.0, 1.0);
-            
+
             if (textRef.current.fillOpacity !== expectedOpacity) {
                 const applyOpacity = (ref) => {
                     if (ref.current) {

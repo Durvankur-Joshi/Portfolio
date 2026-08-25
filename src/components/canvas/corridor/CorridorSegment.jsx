@@ -14,7 +14,7 @@ import CorridorDecorations from './CorridorDecorations';
  * CorridorSegment Component
  * 
  * A single repeatable chunk of the infinite corridor.
- * Each segment contains: walls, avatar, ITOM text, doors, decorations.
+ * Each segment contains: walls, avatar, DURVANKUR text, doors, decorations.
  * 
  * Segment length: 80 units
  * Positioned based on segmentIndex * segmentLength
@@ -49,7 +49,7 @@ const CorridorSegment = ({
                 roomId: 'gallery',
                 relativeZ: -18,
                 side: 'left',
-                label: 'THE GALLERY',
+                label: 'THE PROJECTS',
                 icon: '◈',
                 color: '#f5efe6'
             },
@@ -118,7 +118,7 @@ const CorridorSegment = ({
 
             {/* === WELCOME AREA (Start of segment) - MOVED CLOSER === */}
             <group position={[0, 0, zOffset - 2]}>
-                {/* ITOM Text - centered (ITOM letters adjusted internally) */}
+                {/* DURVANKUR Text - centered (DURVANKUR letters adjusted internally) */}
                 <HeroText position={[0, -0.1, -0.5]} />
 
                 {/* Avatar - center */}

@@ -11,7 +11,7 @@ import '../../styles/ScreenReaderOverlay.scss';
  */
 const ScreenReaderOverlay = () => {
     const { hasEntered, isInRoom, currentRoom, teleportTo, requestExit } = useScene();
-    
+
     // Pobieranie danych do wygenerowania niewidocznego HTML-a dla SEO / robotów
     const projects = useGalleryProjects();
     const studio = useStudioContent();
@@ -26,11 +26,11 @@ const ScreenReaderOverlay = () => {
 
             {/* Main accessible navigation */}
             <nav id="sr-main-nav" className="sr-only" aria-label="Portfolio rooms">
-                <h1>ITom — Creative Developer Portfolio</h1>
+                <h1>DURVANKUR — Software Dev</h1>
                 <h2>Portfolio Navigation</h2>
 
                 {!hasEntered && (
-                    <p>Welcome to ITom's interactive 3D portfolio. Click or press Enter on the doors to enter.</p>
+                    <p>Welcome to DURVANKUR's interactive 3D portfolio. Click or press Enter on the doors to enter.</p>
                 )}
 
                 {hasEntered && !isInRoom && (
@@ -78,7 +78,7 @@ const ScreenReaderOverlay = () => {
                             <div aria-label="About room content">
                                 <h3>About Me</h3>
                                 <p>This room contains my personal story, awards, journey milestones, and technology skills displayed as interactive balloons.</p>
-                                
+
                                 {awards && (
                                     <section>
                                         <h4>My Awards</h4>
@@ -101,7 +101,7 @@ const ScreenReaderOverlay = () => {
                             <div aria-label="Gallery room content">
                                 <h3>My Projects</h3>
                                 <p>Browse through my portfolio projects displayed on paper cards. Click on a project card to see details and visit the live site.</p>
-                                
+
                                 {projects && projects.length > 0 && (
                                     <ul>
                                         {projects.map((p, i) => (

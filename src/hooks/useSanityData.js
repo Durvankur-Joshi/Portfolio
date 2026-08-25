@@ -3,6 +3,8 @@ import { sanityClient, urlFor, getProxyUrl } from '../config/sanity';
 import { useTexture } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three';
+import { mapTechToLogo } from '../utils/techLogoMap';
+import { DURVANKUR_PROJECTS } from '../data/projectsData';
 
 // Flaga bezpieczeństwa: Jeśli użytkownik nie wpisał jeszcze Project ID, 
 // hooki zwrócą null, co pozwoli na załadowanie danych hardcodowanych (fallback).
@@ -96,17 +98,33 @@ export function loadSanityData() {
             ]);
 
             // Mapowanie danych galerii i techStack na ścieżki lokalne oraz optymalizacja obrazków z Sanity
-            if (projectsData && projectsData.length > 0) {
-                cache.projects = projectsData.map(p => {
-                    const frontUrl = p.frontImage ? getProxyUrl(urlFor(p.frontImage).width(1024).quality(80).auto('format')) : null;
-                    const paintedUrl = p.paintedImage ? getProxyUrl(urlFor(p.paintedImage).width(1024).quality(80).auto('format')) : null;
+            const legacySlugs = ['67-game', 'adam-and-ewa', 'young', 'ui-components', 'timberkitty', 'monetune', 'bio'];
+            const legacyTitles = ['67 GAME', 'ADAM & EWA', 'YOUNG MULTI', 'UI COMP', 'TIMBERKITTY', 'MONETUNE', 'BIO'];
+
+            const activeSanityProjects = (projectsData || []).filter(p => {
+                const idMatch = p.id && legacySlugs.includes(p.id.toLowerCase());
+                const titleMatch = p.title && legacyTitles.includes(p.title.toUpperCase());
+                return !idMatch && !titleMatch;
+            });
+
+            if (activeSanityProjects.length > 0) {
+                cache.projects = activeSanityProjects.map((p, idx) => {
+                    const fallback = DURVANKUR_PROJECTS[idx % DURVANKUR_PROJECTS.length];
+                    const frontUrl = p.frontImage ? getProxyUrl(urlFor(p.frontImage).width(1024).quality(80).auto('format')) : fallback.front;
+                    const paintedUrl = p.paintedImage ? getProxyUrl(urlFor(p.paintedImage).width(1024).quality(80).auto('format')) : fallback.painted;
                     return {
                         ...p,
+                        id: p.id || `project-${idx}`,
                         front: frontUrl,
                         painted: paintedUrl,
-                        techStack: p.techStack ? p.techStack.map(t => '/textures/gallery/' + t) : []
+                        techStack: (p.techStack && p.techStack.length > 0)
+                            ? p.techStack.map(t => mapTechToLogo(t))
+                            : fallback.techStack
                     };
                 });
+            } else {
+                // If Sanity only returned legacy documents or no records, use authoritative portfolio projects
+                cache.projects = DURVANKUR_PROJECTS;
             }
 
             // Mapowanie danych studio, przypisanie id oraz optymalizacja obrazków z Sanity

@@ -20,7 +20,7 @@ const ROOM_CONFIG = {
 };
 
 const SUBTITLES = {
-    'THE GALLERY': 'Explore my creative projects',
+    'THE PROJECTS': 'Explore my creative projects',
     'THE STUDIO': 'Watch behind the scenes',
     'DEV DIARY': 'My development journey',
     "LET'S CONNECT": 'Get in touch with me'
@@ -85,19 +85,21 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         bbRight.repeat.set(corridorDepth / NATURAL_TILE_W, 1);
 
         return {
-            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: floorTex, side: THREE.DoubleSide }),
-            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexL, side: THREE.DoubleSide }),
-            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexR, side: THREE.DoubleSide }),
-            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: ceilTex, side: THREE.DoubleSide }),
-            bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbLeft, side: THREE.DoubleSide }),
-            bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbRight, side: THREE.DoubleSide }),
-            threshold: new THREE.MeshBasicMaterial({ color: '#e0e0e0', 
+            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: floorTex, side: THREE.DoubleSide }),
+            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexL, side: THREE.DoubleSide }),
+            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexR, side: THREE.DoubleSide }),
+            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: ceilTex, side: THREE.DoubleSide }),
+            bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbLeft, side: THREE.DoubleSide }),
+            bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbRight, side: THREE.DoubleSide }),
+            threshold: new THREE.MeshBasicMaterial({
+                color: '#e0e0e0',
                 map: (() => {
                     const t = bbTexSrc.clone();
                     t.needsUpdate = true;
                     t.wrapS = t.wrapT = THREE.RepeatWrapping;
                     t.repeat.set(corridorWidth / NATURAL_TILE_W, 1);
-                    return t; })(),
+                    return t;
+                })(),
 
                 side: THREE.DoubleSide
             }),
@@ -120,11 +122,11 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         roomBackWall: new THREE.PlaneGeometry(roomWidth, roomHeight)
     }), []);
 
-    const isGallery = label === 'THE GALLERY';
+    const isGallery = label === 'THE PROJECTS';
 
     // Trigger onReady for generic rooms (which don't have their own component to do it)
     useEffect(() => {
-        if (showRoom && !['THE GALLERY', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
+        if (showRoom && !['THE PROJECTS', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
             onReady?.();
         }
     }, [showRoom, label, onReady]);
