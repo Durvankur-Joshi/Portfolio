@@ -1,5 +1,5 @@
 Directory structure:
-└── portfolio-itom/
+└── Portfolio/
     ├── README.md
     ├── eslint.config.js
     ├── index.html
@@ -198,7 +198,6 @@ Directory structure:
     │       │   ├── ramkanazdjeciemala.webp
     │       │   ├── rysuneknaobraz1.webp
     │       │   ├── rysuneknaobrazek3.webp
-    │       │   ├── spider_hero.webp
     │       │   ├── strzalka.webp
     │       │   ├── szafkaprzod.webp
     │       │   ├── szafkaprzodgora.webp
@@ -3144,12 +3143,6 @@ FILE: public/textures/corridor/rysuneknaobraz1.webp
 
 ================================================
 FILE: public/textures/corridor/rysuneknaobrazek3.webp
-================================================
-[Binary file]
-
-
-================================================
-FILE: public/textures/corridor/spider_hero.webp
 ================================================
 [Binary file]
 
@@ -6127,7 +6120,7 @@ const Avatar = ({ position = [10, -20, 30] }) => {
 
         if (textures[0] && textures[0].image) {
             const aspectRatio = textures[0].image.width / textures[0].image.height;
-            const baseHeight = 2.3; // Fixed size
+            const baseHeight = 2.8; // Fixed size
             setDimensions({
                 width: baseHeight * aspectRatio,
                 height: baseHeight
@@ -6138,7 +6131,7 @@ const Avatar = ({ position = [10, -20, 30] }) => {
         // to prevent React from overwriting our useFrame mutations
         if (meshRef.current && textures[currentFrame.current]) {
             meshRef.current.material.map = textures[currentFrame.current];
-            meshRef.current.material.needsUpdate = true;
+            meshRef.current.material.needsUpda = true;
         }
     }, [textures]);
 
@@ -6424,7 +6417,7 @@ export default Corridor;
 ================================================
 FILE: src/components/canvas/corridor/CorridorDecorations.jsx
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x81 in position 14189: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x81 in position 14199: character maps to <undefined>
 
 
 ================================================
@@ -6481,7 +6474,7 @@ const CorridorSegment = ({
                 roomId: 'gallery',
                 relativeZ: -18,
                 side: 'left',
-                label: 'THE GALLERY',
+                label: 'THE PROJECTS',
                 icon: 'â—ˆ',
                 color: '#f5efe6'
             },
@@ -7261,7 +7254,7 @@ export default Door;
 ================================================
 FILE: src/components/canvas/corridor/DoorSection.jsx
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x81 in position 41113: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x81 in position 41285: character maps to <undefined>
 
 
 ================================================
@@ -7325,17 +7318,21 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
 
     // Letter positions for DURVANKUR split effect
     const letters = useMemo(() => [
-        { char: 'I', baseX: -0.95, splitDir: -1.6, delay: 0 },
-        { char: 'T', baseX: -0.43, splitDir: -0.6, delay: 0 },
-        { char: 'O', baseX: 0.23, splitDir: 0.6, delay: 0 },
-        { char: 'M', baseX: 0.95, splitDir: 1.8, delay: 0 },
+        { char: 'D', baseX: -2.00, splitDir: -1.8, delay: 0 },
+        { char: 'U', baseX: -1.50, splitDir: -1.35, delay: 0 },
+        { char: 'R', baseX: -1.00, splitDir: -0.9, delay: 0 },
+        { char: 'V', baseX: -0.50, splitDir: -0.45, delay: 0 },
+        { char: 'A', baseX: 0.00, splitDir: 0.0, delay: 0 },
+        { char: 'N', baseX: 0.50, splitDir: 0.45, delay: 0 },
+        { char: 'K', baseX: 1.00, splitDir: 0.9, delay: 0 },
+        { char: 'U', baseX: 1.50, splitDir: 1.35, delay: 0 },
+        { char: 'R', baseX: 2.00, splitDir: 1.8, delay: 0 },
     ], []);
-
     // Tagline words for split effect
     const taglineWords = useMemo(() => [
         { text: '<', baseX: -0.85, splitDir: -1.5, delay: 0 },
-        { text: 'creative', baseX: -0.4, splitDir: -0.8, delay: 0 },
-        { text: 'developer', baseX: 0.4, splitDir: 0.8, delay: 0 },
+        { text: 'AI & Web', baseX: -0.4, splitDir: -0.8, delay: 0 },
+        { text: 'Developer', baseX: 0.4, splitDir: 0.8, delay: 0 },
         { text: '/>', baseX: 0.85, splitDir: 1.5, delay: 0 },
     ], []);
 
@@ -7408,7 +7405,7 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
                     position={[letter.baseX, 0.2, 0]}
                     fontSize={0.9}
                     font={RUBIK_SCRIBBLE_URL}
-                    color="#ffffff"
+                    color="#db0202ff"
                     outlineWidth={0.012}
                     outlineColor="#1a1a1a"
                     anchorX="center"
@@ -7768,8 +7765,8 @@ const ROOM_CONFIG = {
 };
 
 const SUBTITLES = {
-    'THE GALLERY': 'Explore my creative projects',
-    'THE STUDIO': 'Watch behind the scenes',
+    'THE PROJECTS': 'Explore my creative projects',
+    'THE STUDIO': 'Technical skills and engineering expertise',
     'DEV DIARY': 'My development journey',
     "LET'S CONNECT": 'Get in touch with me'
 };
@@ -7833,19 +7830,21 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         bbRight.repeat.set(corridorDepth / NATURAL_TILE_W, 1);
 
         return {
-            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: floorTex, side: THREE.DoubleSide }),
-            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexL, side: THREE.DoubleSide }),
-            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: wallTexR, side: THREE.DoubleSide }),
-            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: ceilTex, side: THREE.DoubleSide }),
-            bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbLeft, side: THREE.DoubleSide }),
-            bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0',  map: bbRight, side: THREE.DoubleSide }),
-            threshold: new THREE.MeshBasicMaterial({ color: '#e0e0e0', 
+            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: floorTex, side: THREE.DoubleSide }),
+            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexL, side: THREE.DoubleSide }),
+            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexR, side: THREE.DoubleSide }),
+            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: ceilTex, side: THREE.DoubleSide }),
+            bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbLeft, side: THREE.DoubleSide }),
+            bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbRight, side: THREE.DoubleSide }),
+            threshold: new THREE.MeshBasicMaterial({
+                color: '#e0e0e0',
                 map: (() => {
                     const t = bbTexSrc.clone();
                     t.needsUpdate = true;
                     t.wrapS = t.wrapT = THREE.RepeatWrapping;
                     t.repeat.set(corridorWidth / NATURAL_TILE_W, 1);
-                    return t; })(),
+                    return t;
+                })(),
 
                 side: THREE.DoubleSide
             }),
@@ -7868,11 +7867,11 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         roomBackWall: new THREE.PlaneGeometry(roomWidth, roomHeight)
     }), []);
 
-    const isGallery = label === 'THE GALLERY';
+    const isGallery = label === 'THE PROJECTS';
 
     // Trigger onReady for generic rooms (which don't have their own component to do it)
     useEffect(() => {
-        if (showRoom && !['THE GALLERY', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
+        if (showRoom && !['THE PROJECTS', 'THE STUDIO', 'THE ABOUT', "LET'S CONNECT"].includes(label)) {
             onReady?.();
         }
     }, [showRoom, label, onReady]);
@@ -10333,7 +10332,7 @@ console.log('Modifications applied successfully.');
 ================================================
 FILE: src/components/canvas/rooms/About/InfiniteSkyManager.jsx
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x90 in position 16122: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x90 in position 16137: character maps to <undefined>
 
 
 ================================================
@@ -13165,418 +13164,219 @@ export const usePaintMaterial = (options = {}) => {
 FILE: src/components/canvas/rooms/Studio/contentData.js
 ================================================
 /**
- * Studio Content Data
+ * Skills Content Data
  * 
- * This file contains all content items for the Studio monitor tower.
- * Each item will be displayed on a monitor in the tower.
+ * This file contains technical skill categories for the Skills monitor tower.
+ * Each item is displayed on a monitor in the tower.
  * 
- * Platforms: 'youtube', 'blog', 'tiktok'
+ * Categories: 'ai-ml', 'frontend', 'backend', 'databases', 'devops-cloud', 'web3'
  */
 
-export const PLATFORM_CONFIG = {
-    youtube: {
-        color: '#FF0000',
-        accentColor: '#cc0000',
-        icon: '▶',
-        label: 'YouTube',
+export const CATEGORY_CONFIG = {
+    'ai-ml': {
+        color: '#7C3AED',
+        accentColor: '#6D28D9',
+        icon: '🤖',
+        label: 'AI / ML',
         shape: 'tv', // Wide CRT style
     },
-    blog: {
-        color: '#4A90D9',
-        accentColor: '#2d6cb5',
-        icon: '📝',
-        label: 'Blog',
-        shape: 'monitor', // Thin desktop monitor
+    'frontend': {
+        color: '#06B6D4',
+        accentColor: '#0891B2',
+        icon: '⚡',
+        label: 'Frontend',
+        shape: 'monitor', // Desktop monitor style
     },
-    tiktok: {
-        color: '#00F2EA',
-        accentColor: '#FF0050',
-        icon: '🎵',
-        label: 'TikTok',
-        shape: 'phone', // Vertical phone
+    'backend': {
+        color: '#10B981',
+        accentColor: '#059669',
+        icon: '⚙️',
+        label: 'Backend',
+        shape: 'tv', // Wide terminal display
     },
-    instagram: {
-        color: '#E1306C',
-        accentColor: '#C13584',
-        icon: '📷',
-        label: 'Instagram',
-        shape: 'phone',
+    'databases': {
+        color: '#F59E0B',
+        accentColor: '#D97706',
+        icon: '🗄️',
+        label: 'Databases',
+        shape: 'monitor', // Desktop monitor style
     },
-    x: {
-        color: '#000000',
-        accentColor: '#14171A',
-        icon: '𝕏',
-        label: 'X (Twitter)',
-        shape: 'monitor',
+    'devops-cloud': {
+        color: '#3B82F6',
+        accentColor: '#2563EB',
+        icon: '☁️',
+        label: 'DevOps & Cloud',
+        shape: 'monitor', // Desktop monitor style
     },
-    linkedin: {
-        color: '#0077B5',
-        accentColor: '#005E93',
-        icon: 'in',
-        label: 'LinkedIn',
-        shape: 'monitor',
-    },
-    codrops: {
-        color: '#0099FF',
-        accentColor: '#0077CC',
-        icon: '💧',
-        label: 'Codrops',
-        shape: 'monitor',
+    'web3': {
+        color: '#EC4899',
+        accentColor: '#DB2777',
+        icon: '⛓️',
+        label: 'Web3',
+        shape: 'phone', // Vertical phone / mobile dApp style
     },
 };
 
-// Sample content data - replace with real content later
-const RAW_CONTENT_DATA = [
-    // ============ YouTube Videos ============
-    {
-        id: 'yt-001',
-        platform: 'youtube',
-        title: 'I Built a Website for Young Multi for $__,___',
-        description: 'It\'s late 2025, we\'re flying to space, and Young Multi... still didn\'t have his own website. So I took matters into my own hands.',
-        frontTexture: '/textures/studio/tvfront_filmikprojektdlamultiego.webp',
-        paintedFrontTexture: '/textures/studio/tvfront_filmikprojektdlamultiego_painted.webp',
-        thumbnail: null,
-        url: 'https://www.youtube.com/watch?v=AOz4fB7NV_I&t=21s',
-        date: '2026-01-10',
-        views: '1.2K',
-        duration: '15:32',
-    },
-    {
-        id: 'yt-002',
-        platform: 'youtube',
-        title: 'Turning an ordinary selfie into a professional AI photoshoot! How Google Nano Banana transformed my photo! (For Free)',
-        description: '📸 Watch how I turned a basic selfie into a professional photoshoot using a free AI tool from Google! In this step-by-step tutorial, I reveal my secret trick for crafting perfect prompts, even if you\'re a total beginner.',
-        frontTexture: '/textures/studio/tvfront_filmikedytowaniezdjec.webp',
-        paintedFrontTexture: '/textures/studio/tvfront_filmikedytowaniezdjec_painted.webp',
-        thumbnail: null,
-        url: 'https://www.youtube.com/watch?v=WQTOD7uXHNY&t=10s',
-        date: '2025-10-11',
-        views: '121',
-        duration: '7:45',
-    },
-    {
-        id: 'yt-003',
-        platform: 'youtube',
-        title: 'React Three Fiber Crash Course',
-        description: 'Everything you need to know to get started with 3D in React.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-12-28',
-        views: '2.4K',
-        duration: '22:10',
-    },
-    {
-        id: 'yt-004',
-        platform: 'youtube',
-        title: 'Shaders for Beginners',
-        description: 'Introduction to GLSL shaders in WebGL and Three.js.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-12-15',
-        views: '1.8K',
-        duration: '18:33',
-    },
-    {
-        id: 'yt-005',
-        platform: 'youtube',
-        title: 'GSAP + Three.js Integration',
-        description: 'How to animate 3D objects with GSAP ScrollTrigger.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-12-01',
-        views: '3.1K',
-        duration: '20:15',
-    },
-    {
-        id: 'yt-006',
-        platform: 'youtube',
-        title: 'Building Interactive 3D Scenes',
-        description: 'Raycasting, hover effects, and click interactions in Three.js.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-11-20',
-        views: '2.8K',
-        duration: '25:00',
-    },
-    {
-        id: 'yt-007',
-        platform: 'youtube',
-        title: 'WebGL Performance Deep Dive',
-        description: 'Optimizing draw calls, geometry instancing, and more.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-11-10',
-        views: '1.5K',
-        duration: '30:22',
-    },
-    {
-        id: 'yt-008',
-        platform: 'youtube',
-        title: 'Procedural Textures Tutorial',
-        description: 'Creating textures with noise and math functions.',
-        thumbnail: null,
-        url: 'https://www.youtube.com/@DURVANKURpoland',
-        date: '2025-10-28',
-        views: '1.9K',
-        duration: '18:45',
-    },
+// Backward-compatible alias for existing consumers
+export const PLATFORM_CONFIG = CATEGORY_CONFIG;
 
-    // ============ Blog Posts ============
+export const RAW_CONTENT_DATA = [
     {
-        id: 'blog-001',
-        platform: 'blog',
-        title: 'Double Site of the Day confirmed! 🏆🏆',
-        description: 'You\'ve probably noticed I\'ve been sharing a bunch of SOTD certificates on my stories lately. Yes, it\'s true—the YOUNG MULTI project officially scored a "double" and got recognized on the international stage...',
-        frontTexture: '/textures/studio/monitorfront_postnafbdoublewinner.webp',
-        paintedFrontTexture: '/textures/studio/monitorfront_postnafbdoublewinner_painted.webp',
+        id: 'ai-ml',
+        platform: 'ai-ml',
+        category: 'AI / ML',
+        title: 'AI / ML',
+        device: 'tv',
+        description: 'Specializing in machine learning pipelines, deep learning frameworks, large language model fine-tuning, computer vision, and AI agent architectures.',
+        skills: [
+            'Python',
+            'PyTorch',
+            'TensorFlow',
+            'LangChain',
+            'Hugging Face',
+            'OpenCV',
+            'LLM Fine-tuning'
+        ],
+        frontTexture: '/textures/studio/tv_front.webp',
+        paintedFrontTexture: '/textures/studio/tv_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58/posts/pfbid0TmvbFrc9ASYBQHpv3fcz5gM9WZrgrLMzZFbbtSFySmzQNickLRNh6ubu388D7hHXl?rdid=nWrKXJXR8EqibqvZ',
-        date: '2026-01-08',
-        readTime: '5 min',
+        url: 'https://github.com/Durvankur-Joshi',
     },
     {
-        id: 'blog-002',
-        platform: 'blog',
-        title: 'The Hand-Drawn Aesthetic',
-        description: 'How I achieved a sketch-like visual style using shaders.',
+        id: 'frontend',
+        platform: 'frontend',
+        category: 'FRONTEND',
+        title: 'FRONTEND',
+        device: 'monitor',
+        description: 'Crafting immersive 3D interactive web experiences, performant web applications, and responsive creative user interfaces with modern frameworks and shaders.',
+        skills: [
+            'React',
+            'Next.js',
+            'Three.js',
+            'React Three Fiber',
+            'TypeScript',
+            'Tailwind CSS',
+            'GSAP',
+            'HTML',
+            'CSS',
+            'JavaScript'
+        ],
+        frontTexture: '/textures/studio/monitor_front.webp',
+        paintedFrontTexture: '/textures/studio/monitor_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-12-20',
-        readTime: '8 min',
+        url: 'https://github.com/Durvankur-Joshi',
     },
     {
-        id: 'blog-003',
-        platform: 'blog',
-        title: 'Optimizing 3D for the Web',
-        description: 'Performance tips for smooth 60fps 3D experiences.',
+        id: 'backend',
+        platform: 'backend',
+        category: 'BACKEND',
+        title: 'BACKEND',
+        device: 'tv',
+        description: 'Designing high-performance backend microservices, real-time communication systems, asynchronous APIs, and robust application logic.',
+        skills: [
+            'FastAPI',
+            'Node.js',
+            'Express',
+            'Python',
+            'REST APIs',
+            'GraphQL',
+            'WebSockets'
+        ],
+        frontTexture: '/textures/studio/tv_front.webp',
+        paintedFrontTexture: '/textures/studio/tv_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-12-10',
-        readTime: '6 min',
+        url: 'https://github.com/Durvankur-Joshi',
     },
     {
-        id: 'blog-004',
-        platform: 'blog',
-        title: 'Creative Coding Journey',
-        description: 'My path from traditional dev to creative development.',
+        id: 'databases',
+        platform: 'databases',
+        category: 'DATABASES',
+        title: 'DATABASES',
+        device: 'monitor',
+        description: 'Architecting relational data stores, high-speed in-memory caches, document databases, and vector similarity search for AI/RAG pipelines.',
+        skills: [
+            'PostgreSQL',
+            'MongoDB',
+            'Redis',
+            'Supabase',
+            'Pinecone Vector DB'
+        ],
+        frontTexture: '/textures/studio/monitor_front.webp',
+        paintedFrontTexture: '/textures/studio/monitor_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-11-25',
-        readTime: '10 min',
+        url: 'https://github.com/Durvankur-Joshi',
     },
     {
-        id: 'blog-005',
-        platform: 'blog',
-        title: 'The Future of Web Experiences',
-        description: 'Where I think interactive web is heading.',
+        id: 'devops-cloud',
+        platform: 'devops-cloud',
+        category: 'DEVOPS & CLOUD',
+        title: 'DEVOPS & CLOUD',
+        device: 'monitor',
+        description: 'Automating CI/CD deployment pipelines, containerizing environments, managing cloud infrastructure, and optimizing modern web builds.',
+        skills: [
+            'Docker',
+            'GitHub Actions',
+            'AWS Cloud',
+            'Linux',
+            'Vercel',
+            'Vite'
+        ],
+        frontTexture: '/textures/studio/monitor_front.webp',
+        paintedFrontTexture: '/textures/studio/monitor_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-11-15',
-        readTime: '7 min',
+        url: 'https://github.com/Durvankur-Joshi',
     },
     {
-        id: 'blog-006',
-        platform: 'blog',
-        title: 'Design Systems for 3D',
-        description: 'Creating consistent 3D component libraries.',
+        id: 'web3',
+        platform: 'web3',
+        category: 'WEB3',
+        title: 'WEB3',
+        device: 'phone',
+        description: 'Developing secure decentralized smart contracts, interacting with EVM blockchains, and building decentralized web applications.',
+        skills: [
+            'Solidity',
+            'Smart Contracts',
+            'Web3.js',
+            'Ethers.js',
+            'IPFS'
+        ],
+        frontTexture: '/textures/studio/phone_front.webp',
+        paintedFrontTexture: '/textures/studio/phone_front_painted.webp',
         thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-11-01',
-        readTime: '12 min',
-    },
-    {
-        id: 'blog-007',
-        platform: 'blog',
-        title: 'Accessibility in 3D Web',
-        description: 'Making immersive experiences accessible to everyone.',
-        thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-10-20',
-        readTime: '9 min',
-    },
-    {
-        id: 'blog-008',
-        platform: 'blog',
-        title: 'Audio in Web Experiences',
-        description: 'Adding spatial audio to enhance immersion.',
-        thumbnail: null,
-        url: 'https://www.facebook.com/tomasz.szmajda.58',
-        date: '2025-10-10',
-        readTime: '6 min',
-    },
-
-    // ============ TikToks ============
-    {
-        id: 'tt-001',
-        platform: 'tiktok',
-        title: 'Zaobserwuj mnie na TikToku! ✨',
-        description: 'Dzielę się tam wskazówkami z designu, kodowania i nie tylko.',
-        frontTexture: '/textures/studio/phonefront_followmeontiktok.webp',
-        paintedFrontTexture: '/textures/studio/phonefront_followmeontiktok_painted.webp',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2026-01-09',
-        views: '15.2K',
-        likes: '1.2K',
-    },
-    {
-        id: 'tt-002',
-        platform: 'tiktok',
-        title: 'Coding a door animation 🚪',
-        description: 'POV: You open a door in Three.js',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2026-01-03',
-        views: '8.5K',
-        likes: '756',
-    },
-    {
-        id: 'tt-003',
-        platform: 'tiktok',
-        title: 'When the shader finally works 🎉',
-        description: 'The satisfaction of debugging shaders',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-12-25',
-        views: '22.1K',
-        likes: '3.4K',
-    },
-    {
-        id: 'tt-004',
-        platform: 'tiktok',
-        title: 'Day in the life: WebGL Dev',
-        description: 'What I do as a creative developer',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-12-18',
-        views: '12.3K',
-        likes: '1.1K',
-    },
-    {
-        id: 'tt-005',
-        platform: 'tiktok',
-        title: 'React vs Three.js POV 😅',
-        description: 'The struggle is real',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-12-12',
-        views: '45.2K',
-        likes: '5.8K',
-    },
-    {
-        id: 'tt-006',
-        platform: 'tiktok',
-        title: 'Making a 3D button 🔘',
-        description: '30 seconds of pure satisfaction',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-12-05',
-        views: '18.7K',
-        likes: '2.1K',
-    },
-    {
-        id: 'tt-007',
-        platform: 'tiktok',
-        title: 'This shader took 3 hours 💀',
-        description: 'Was it worth it? Absolutely.',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-11-28',
-        views: '33.4K',
-        likes: '4.2K',
-    },
-    {
-        id: 'tt-008',
-        platform: 'tiktok',
-        title: 'Hover effects compilation ✨',
-        description: 'My favorite micro-interactions',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-11-20',
-        views: '28.9K',
-        likes: '3.6K',
-    },
-    {
-        id: 'tt-009',
-        platform: 'tiktok',
-        title: 'Loading screen ideas 🔄',
-        description: 'Creative preloader concepts',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-11-15',
-        views: '19.3K',
-        likes: '2.4K',
-    },
-    {
-        id: 'tt-010',
-        platform: 'tiktok',
-        title: 'Cursor goes brrr 🖱️',
-        description: 'Custom cursor madness',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-11-08',
-        views: '41.2K',
-        likes: '5.1K',
-    },
-    {
-        id: 'tt-011',
-        platform: 'tiktok',
-        title: 'Parallax scrolling magic 🪄',
-        description: 'Simple but effective',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-11-01',
-        views: '25.6K',
-        likes: '3.0K',
-    },
-    {
-        id: 'tt-012',
-        platform: 'tiktok',
-        title: 'Text animation inspo 📝',
-        description: 'Typography that moves',
-        thumbnail: null,
-        url: 'https://www.tiktok.com/@DURVANKURpoland',
-        date: '2025-10-25',
-        views: '31.8K',
-        likes: '4.0K',
+        url: 'https://github.com/Durvankur-Joshi',
     },
 ];
 
-const ytTextures = ['/textures/studio/tvfront_filmikprojektdlamultiego.webp', '/textures/studio/tvfront_filmikedytowaniezdjec.webp'];
-const ytPaintedTextures = ['/textures/studio/tvfront_filmikprojektdlamultiego_painted.webp', '/textures/studio/tvfront_filmikedytowaniezdjec_painted.webp'];
-const blogTextures = ['/textures/studio/monitorfront_postnafbdoublewinner.webp'];
-const blogPaintedTextures = ['/textures/studio/monitorfront_postnafbdoublewinner_painted.webp'];
-const ttTextures = ['/textures/studio/phonefront_followmeontiktok.webp'];
-const ttPaintedTextures = ['/textures/studio/phonefront_followmeontiktok_painted.webp'];
-
-let ytIdx = 0, blogIdx = 0, ttIdx = 0;
-let ytPIdx = 0, blogPIdx = 0, ttPIdx = 0;
-
 export const CONTENT_DATA = RAW_CONTENT_DATA.map((item) => {
+    const shape = item.device || CATEGORY_CONFIG[item.platform]?.shape || 'monitor';
     return {
         ...item,
         frontTexture: item.frontTexture || (
-            item.platform === 'youtube' ? ytTextures[ytIdx++ % ytTextures.length] :
-                item.platform === 'blog' ? blogTextures[blogIdx++ % blogTextures.length] :
-                    ttTextures[ttIdx++ % ttTextures.length]
+            shape === 'tv' ? '/textures/studio/tv_front.webp' :
+                shape === 'phone' ? '/textures/studio/phone_front.webp' :
+                    '/textures/studio/monitor_front.webp'
         ),
         paintedFrontTexture: item.paintedFrontTexture || (
-            item.platform === 'youtube' ? ytPaintedTextures[ytPIdx++ % ytPaintedTextures.length] :
-                item.platform === 'blog' ? blogPaintedTextures[blogPIdx++ % blogPaintedTextures.length] :
-                    ttPaintedTextures[ttPIdx++ % ttPaintedTextures.length]
-        )
+            shape === 'tv' ? '/textures/studio/tv_front_painted.webp' :
+                shape === 'phone' ? '/textures/studio/phone_front_painted.webp' :
+                    '/textures/studio/monitor_front_painted.webp'
+        ),
     };
 });
 
-// Helper to get content by platform
+export const SKILLS_DATA = CONTENT_DATA;
+
+// Helper to get content by platform or category
 export const getContentByPlatform = (platform) => {
-    if (platform === 'all') return CONTENT_DATA;
-    return CONTENT_DATA.filter(item => item.platform === platform);
+    if (!platform || platform === 'all') return CONTENT_DATA;
+    return CONTENT_DATA.filter(item => item.platform === platform || item.id === platform);
 };
 
-// Get latest content (for "On Air" indicator)
+export const getContentByCategory = getContentByPlatform;
+
+// Helper for latest content
 export const getLatestContent = () => {
-    return [...CONTENT_DATA].sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    return CONTENT_DATA[0];
 };
 
 
@@ -13599,7 +13399,7 @@ import { useScene } from '../../../../context/SceneContext';
 import { useAchievements } from '../../../../context/AchievementsContext';
 import { TextureLoader } from 'three';
 import FloatingCodeParticles from './FloatingCodeParticles';
-import { PositionalAudio } from '@react-three/drei';
+import { PositionalAudio, Text } from '@react-three/drei';
 import { useAudio } from '../../../../context/AudioManager';
 import { useStudioContent } from '../../../../hooks/useSanityData';
 import '../../shaders/RevealMaterial';
@@ -14451,6 +14251,39 @@ const MonitorBlock = memo(({ item, meshRef, isSelected, onMonitorClick, disabled
                     }
                 })}
             </mesh>
+
+            {/* SCREEN TEXT (Category Header + Skills List) */}
+            <group position={[0, 0, item.depth / 2 + 0.008]}>
+                <Text
+                    font="/fonts/CabinSketch-Bold.ttf"
+                    fontSize={isPhoneMonitor ? 0.07 : 0.095}
+                    color="#111111"
+                    anchorX="center"
+                    anchorY="top"
+                    position={[0, (item.height / 2) - (isPhoneMonitor ? 0.12 : 0.14), 0]}
+                    maxWidth={item.width * (isPhoneMonitor ? 0.75 : 0.82)}
+                    textAlign="center"
+                    letterSpacing={0.03}
+                >
+                    {item.category || item.title}
+                </Text>
+
+                {item.skills && item.skills.length > 0 && (
+                    <Text
+                        font="/fonts/JetBrainsMono-Bold.woff2"
+                        fontSize={isPhoneMonitor ? 0.042 : 0.054}
+                        lineHeight={1.26}
+                        color="#1a1a1a"
+                        anchorX="center"
+                        anchorY="top"
+                        position={[0, (item.height / 2) - (isPhoneMonitor ? 0.26 : 0.29), 0]}
+                        maxWidth={item.width * (isPhoneMonitor ? 0.75 : 0.82)}
+                        textAlign="center"
+                    >
+                        {item.skills.join('\n')}
+                    </Text>
+                )}
+            </group>
         </group>
     );
 });
@@ -15327,7 +15160,7 @@ const GlobalOverlay = () => {
 const ContentCard = ({ content, isOpen, onClose, isMobile }) => {
     if (!content) return null;
 
-    const label = content.platformConfig?.label || 'Content';
+    const label = content.platformConfig?.label || content.category || 'Skills';
 
     // GSAP TextPlugin typing effect for description
     const descriptionRef = useRef(null);
@@ -15751,22 +15584,24 @@ const ContentCard = ({ content, isOpen, onClose, isMobile }) => {
                             )}
                         </div>
                     ) : (
-                        /* === LAYOUT: DEFAULT (The Studio Style) === */
+                        /* === LAYOUT: DEFAULT (The Skills Style) === */
                         <>
-                            {/* Meta Info */}
-                            <div style={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                gap: '1rem',
-                                fontSize: '0.8rem',
-                                color: '#666',
-                                borderBottom: '1px dashed #ccc',
-                                paddingBottom: '1rem',
-                                ...getStaggerStyle(200)
-                            }}>
-                                <strong>{content.date}</strong>
-                                {content.views && <span>{content.views} views</span>}
-                            </div>
+                            {/* Meta Info (if date or views exist) */}
+                            {(content.date || content.views) && (
+                                <div style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    gap: '1rem',
+                                    fontSize: '0.8rem',
+                                    color: '#666',
+                                    borderBottom: '1px dashed #ccc',
+                                    paddingBottom: '0.6rem',
+                                    ...getStaggerStyle(200)
+                                }}>
+                                    {content.date && <strong>{content.date}</strong>}
+                                    {content.views && <span>{content.views} views</span>}
+                                </div>
+                            )}
 
                             {/* Description */}
                             <p 
@@ -15776,27 +15611,59 @@ const ContentCard = ({ content, isOpen, onClose, isMobile }) => {
                                 color: '#333',
                                 fontSize: '0.95rem',
                                 margin: 0,
-                                minHeight: '80px', // Prevent layout jump while typing
-                                ...getStaggerStyle(300)
+                                minHeight: '60px',
+                                ...getStaggerStyle(250)
                             }}>
                                 {content.description}
                             </p>
 
-                            {/* Action Button */}
-                            <div style={{
-                                marginTop: 'auto',
-                                paddingTop: '1rem',
-                                ...getStaggerStyle(400)
-                            }}>
-                                <a
-                                    href={content.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="studio-action-button"
-                                >
-                                    Open Link â†—
-                                </a>
-                            </div>
+                            {/* Skills Badges */}
+                            {content.skills && content.skills.length > 0 && (
+                                <div style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    gap: '0.45rem',
+                                    marginTop: '0.4rem',
+                                    ...getStaggerStyle(350)
+                                }}>
+                                    {content.skills.map((skill, index) => (
+                                        <span
+                                            key={index}
+                                            style={{
+                                                padding: '0.22rem 0.55rem',
+                                                backgroundColor: '#f5f5f5',
+                                                border: '1.5px solid #1a1a1a',
+                                                borderRadius: '3px 255px 5px 255px / 255px 3px 225px 5px',
+                                                fontSize: '0.85rem',
+                                                fontWeight: 700,
+                                                fontFamily: "'JetBrains Mono', monospace, sans-serif",
+                                                boxShadow: '2px 2px 0px rgba(0,0,0,0.1)',
+                                                color: '#111111',
+                                            }}
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Action Button (if URL exists) */}
+                            {content.url && (
+                                <div style={{
+                                    marginTop: 'auto',
+                                    paddingTop: '1rem',
+                                    ...getStaggerStyle(400)
+                                }}>
+                                    <a
+                                        href={content.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="studio-action-button"
+                                    >
+                                        GitHub Profile â†—
+                                    </a>
+                                </div>
+                            )}
                         </>
                     )}
                 </div>
@@ -15828,7 +15695,7 @@ const ROOMS = [
     { id: 'about', label: 'About', x: 43, y: 38 },      // Paper airplane (left side)
     { id: 'gallery', label: 'Gallery', x: 43, y: 72 },  // City buildings (bottom left)
     { id: 'contact', label: 'Contact', x: 57, y: 25 },  // Pier/dock (top right)
-    { id: 'studio', label: 'Studio', x: 57, y: 55 },    // Monitors stack (right side)
+    { id: 'studio', label: 'Skills', x: 57, y: 55 },    // Monitors stack (right side)
 ];
 
 // Pin starting position - the dashed circle at the bottom of the tower
@@ -16192,14 +16059,14 @@ const NavigationUI = () => {
                                 onFocus={() => setHoveredRoom('studio')}
                                 onBlur={() => setHoveredRoom(null)}
                                 onClick={() => handleRoomClick('studio')}
-                                aria-label="Teleport to Studio room"
+                                aria-label="Teleport to Skills room"
                             />
 
                             {/* Permanent Map Text Labels */}
                             <div className="map-room-label about">ABOUT</div>
                             <div className="map-room-label gallery">THE<br />GALLERY</div>
                             <div className="map-room-label contact">CONTACT</div>
-                            <div className="map-room-label studio">THE<br />STUDIO</div>
+                            <div className="map-room-label studio">THE<br />SKILLS</div>
 
                             {/* Pin slot markers - 4 locations */}
                             {ROOMS.map((room) => (
@@ -16377,7 +16244,7 @@ const ScreenReaderOverlay = () => {
                             </li>
                             <li>
                                 <button onClick={() => teleportTo('studio')} type="button">
-                                    The Studio â€” Technologies and experience
+                                    Skills â€” Technologies and technical expertise
                                 </button>
                             </li>
                         </ul>
@@ -16390,7 +16257,7 @@ const ScreenReaderOverlay = () => {
                             You are in the {currentRoom === 'about' ? 'About' :
                                 currentRoom === 'gallery' ? 'Gallery' :
                                     currentRoom === 'contact' ? 'Contact' :
-                                        currentRoom === 'studio' ? 'Studio' : currentRoom} room.
+                                        currentRoom === 'studio' ? 'Skills' : currentRoom} room.
                         </p>
                         <button onClick={requestExit} type="button">
                             Go back to corridor
@@ -16445,16 +16312,17 @@ const ScreenReaderOverlay = () => {
                             </div>
                         )}
                         {currentRoom === 'studio' && (
-                            <div aria-label="Studio room content">
-                                <h3>The Studio</h3>
-                                <p>Explore my experience and skills on rotating monitors. Click a monitor to read detailed information about my work.</p>
+                            <div aria-label="Skills room content">
+                                <h3>Skills</h3>
+                                <p>Explore technical skills and developer expertise on rotating monitors. Click a monitor to read detailed information about each category.</p>
 
                                 {studio && studio.length > 0 && (
                                     <ul>
                                         {studio.map((s, i) => (
                                             <li key={i}>
-                                                <h4>{s.title} ({s.platform})</h4>
+                                                <h4>{s.title}</h4>
                                                 <p>{s.description}</p>
+                                                {s.skills && <p>Technologies: {s.skills.join(', ')}</p>}
                                                 {s.url && <a href={s.url}>View content</a>}
                                             </li>
                                         ))}
@@ -16476,7 +16344,7 @@ const ScreenReaderOverlay = () => {
                                 <li><button onClick={() => teleportTo('contact')} type="button">Go to Contact</button></li>
                             )}
                             {currentRoom !== 'studio' && (
-                                <li><button onClick={() => teleportTo('studio')} type="button">Go to Studio</button></li>
+                                <li><button onClick={() => teleportTo('studio')} type="button">Go to Skills</button></li>
                             )}
                         </ul>
                     </>
@@ -16795,15 +16663,6 @@ export const STUDIO_TEXTURES = [
     '/textures/studio/phone_back_painted.webp',
     '/textures/studio/phone_side.webp',
     '/textures/studio/phone_side_painted.webp',
-    // Custom content front textures
-    '/textures/studio/monitorfront_postnafbdoublewinner.webp',
-    '/textures/studio/monitorfront_postnafbdoublewinner_painted.webp',
-    '/textures/studio/phonefront_followmeontiktok.webp',
-    '/textures/studio/phonefront_followmeontiktok_painted.webp',
-    '/textures/studio/tvfront_filmikedytowaniezdjec.webp',
-    '/textures/studio/tvfront_filmikedytowaniezdjec_painted.webp',
-    '/textures/studio/tvfront_filmikprojektdlamultiego.webp',
-    '/textures/studio/tvfront_filmikprojektdlamultiego_painted.webp',
 ];
 
 // ============================================
@@ -17576,7 +17435,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'FARMERCHAIN',
         front: '/textures/gallery/youngmultiprzod.webp',
         painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi/FarmerChain',
+        url: 'https://github.com/Durvankur-Joshi/farmer-chain',
         description: 'Decentralized farm-to-consumer traceability platform using blockchain to provide transparent agricultural supply-chain tracking and verifiable product history.',
         techStack: [
             '/textures/gallery/reactlogo.webp',
@@ -17590,7 +17449,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'AI ARTISTRY',
         front: '/textures/gallery/bioprzod.webp',
         painted: '/textures/gallery/bioprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi/AI-Artsistry',
+        url: 'https://github.com/Durvankur-Joshi/AI-Artistry-client',
         description: 'Generative AI creative platform for producing AI-assisted artwork through intelligent prompt-driven image generation.',
         techStack: [
             '/textures/gallery/reactlogo.webp',
@@ -17604,7 +17463,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'CODEX',
         front: '/textures/gallery/timberkittyprzod.webp',
         painted: '/textures/gallery/timberkittyprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi/CodeX',
+        url: 'https://github.com/Durvankur-Joshi/CodeX',
         description: 'Interactive online coding environment designed to provide a browser-based developer workspace for writing and executing code.',
         techStack: [
             '/textures/gallery/reactlogo.webp',
@@ -17618,7 +17477,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'AI SOFTWARE COMPILER',
         front: '/textures/gallery/youngmultiprzod.webp',
         painted: '/textures/gallery/youngmultiprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi/AI-Software-Compiler',
+        url: 'https://github.com/Durvankur-Joshi/AI-Software-Compiler',
         description: 'AI-powered software generation pipeline that converts natural-language application requirements into structured application architecture and modular web applications.',
         techStack: [
             '/textures/gallery/tailwindlogo.webp',
@@ -17632,7 +17491,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'RESEARCH MITRA',
         front: '/textures/gallery/monetuneprzod.webp',
         painted: '/textures/gallery/monetuneprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi/Research-Mitra',
+        url: 'https://github.com/Durvankur-Joshi/Research_Mitra',
         description: 'AI-powered academic research assistant designed to help users explore research literature, organize information, and improve literature-review workflows.',
         techStack: [
             '/textures/gallery/tailwindlogo.webp',
@@ -17646,7 +17505,7 @@ export const DURVANKUR_PROJECTS = [
         title: 'CHATFUSION',
         front: '/textures/gallery/bioprzod.webp',
         painted: '/textures/gallery/bioprzod_painted.webp',
-        url: 'https://github.com/durvankurjoshi',
+        url: 'https://github.com/Durvankur-Joshi/Chatfusion',
         description: 'Real-time communication application with live messaging and modern full-stack architecture.',
         techStack: [
             '/textures/gallery/reactlogo.webp',
@@ -17691,8 +17550,8 @@ const ROOM_META = {
     },
     studio: {
         path: '/studio',
-        title: 'The Studio â€” DURVANKUR Portfolio',
-        description: 'Explore DURVANKUR\'s content studio â€” YouTube videos, blog posts, and TikToks displayed on floating monitors in an immersive 3D space.',
+        title: 'Skills â€” DURVANKUR Portfolio',
+        description: 'Explore DURVANKUR\'s technical skills â€” AI / ML, Frontend, Backend, Databases, DevOps & Cloud, and Web3 displayed on floating monitors in an immersive 3D space.',
     },
     contact: {
         path: '/contact',
@@ -18481,7 +18340,7 @@ export default useParallax;
 ================================================
 FILE: src/hooks/useSanityData.js
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x8f in position 7020: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x8f in position 5643: character maps to <undefined>
 
 
 ================================================
