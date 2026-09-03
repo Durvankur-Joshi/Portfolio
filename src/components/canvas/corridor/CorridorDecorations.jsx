@@ -225,6 +225,8 @@ const InspectableFrame = ({ frame, wallX, frameTexture, framePaintedTexture, CAB
         groupRef.current.scale.lerp(tempScale, factor);
     });
 
+    
+
     return (
         <group
             ref={groupRef}
