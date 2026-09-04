@@ -5,6 +5,7 @@ import { useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three';
 import { mapTechToLogo } from '../utils/techLogoMap';
 import { DURVANKUR_PROJECTS } from '../data/projectsData';
+import { CONTENT_DATA } from '../components/canvas/rooms/Studio/contentData';
 
 // Flaga bezpieczeństwa: Jeśli użytkownik nie wpisał jeszcze Project ID, 
 // hooki zwrócą null, co pozwoli na załadowanie danych hardcodowanych (fallback).
@@ -44,6 +45,8 @@ const supportsHover = typeof window !== 'undefined' && window.matchMedia('(hover
 
 export function loadSanityData() {
     if (!isSanityConfigured) {
+        cache.projects = DURVANKUR_PROJECTS;
+        cache.content = CONTENT_DATA;
         cache.loaded = true;
         return Promise.resolve(cache);
     }
@@ -134,11 +137,13 @@ export function loadSanityData() {
                     const paintedFrontTextureUrl = item.paintedFrontTexture ? getProxyUrl(urlFor(item.paintedFrontTexture).width(1024).quality(80).auto('format')) : null;
                     return {
                         ...item,
-                        id: item.platform + '-' + index,
+                        id: item.id || (item.platform ? `${item.platform}-${index}` : `studio-${index}`),
                         frontTexture: frontTextureUrl,
                         paintedFrontTexture: paintedFrontTextureUrl
                     };
                 });
+            } else {
+                cache.content = CONTENT_DATA;
             }
 
             // Mapowanie nagród do struktury oczekiwanej przez overlay oraz optymalizacja certyfikatów z Sanity
@@ -265,18 +270,18 @@ export function useGalleryProjects() {
 }
 
 export function useStudioContent() {
-    const [content, setContent] = useState(cache.content);
+    const [content, setContent] = useState(cache.content || CONTENT_DATA);
 
     useEffect(() => {
         loadSanityData();
 
         if (cache.loaded) {
-            setContent(cache.content);
+            setContent(cache.content || CONTENT_DATA);
             return;
         }
 
         const handleUpdate = () => {
-            setContent(cache.content);
+            setContent(cache.content || CONTENT_DATA);
         };
 
         return subscribe(handleUpdate);

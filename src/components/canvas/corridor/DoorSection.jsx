@@ -1116,7 +1116,7 @@ const DoorSection = ({
                                     anchorY="top"
                                     position={[0, +0.03, 0]}
                                 >
-                                    STUDIO
+                                    SKILLS
                                 </Text>
                             </group>
                         )}

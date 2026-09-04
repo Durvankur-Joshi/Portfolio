@@ -412,3 +412,131 @@ export const getContentByPlatform = (platform) => {
 export const getLatestContent = () => {
     return [...CONTENT_DATA].sort((a, b) => new Date(b.date) - new Date(a.date))[0];
 };
+
+// ============================================
+// AUTHORITATIVE SKILLS DATASET - Durvankur Joshi
+// ============================================
+
+export const SKILL_LOGO_MAP = {
+    'python': '/textures/skills/python.webp',
+    'pytorch': '/textures/skills/pytorch.webp',
+    'tensorflow': '/textures/skills/tensorflow.webp',
+    'langchain': '/textures/skills/langchain-color.webp',
+    'hugging face': '/textures/skills/huggingface-color.webp',
+    'huggingface': '/textures/skills/huggingface-color.webp',
+    'opencv': null,
+    'llm fine-tuning': null,
+    'llm': null,
+    'react': '/textures/skills/react.webp',
+    'next.js': '/textures/skills/nextjs-light.webp',
+    'nextjs': '/textures/skills/nextjs-light.webp',
+    'three.js': '/textures/skills/threejs.png',
+    'threejs': '/textures/skills/threejs.png',
+    'react three fiber': '/textures/skills/threejs.png',
+    'r3f': '/textures/skills/threejs.png',
+    'typescript': '/textures/skills/typescript.png',
+    'ts': '/textures/skills/typescript.png',
+    'javascript': '/textures/skills/javascript.webp',
+    'js': '/textures/skills/javascript.webp',
+    'tailwindcss': '/textures/skills/tailwind.webp',
+    'tailwind css': '/textures/skills/tailwind.webp',
+    'tailwind': '/textures/skills/tailwind.webp',
+    'html': '/textures/gallery/htmllogo.webp',
+    'html5': '/textures/gallery/htmllogo.webp',
+    'css': '/textures/gallery/csslogo.webp',
+    'css3': '/textures/gallery/csslogo.webp',
+    'gsap': '/textures/about/GSAPduzybalon.webp',
+    'fastapi': '/textures/skills/fastapi.webp',
+    'node.js': '/textures/skills/nodejs.webp',
+    'nodejs': '/textures/skills/nodejs.webp',
+    'express': '/textures/skills/nodejs.webp',
+    'express.js': '/textures/skills/nodejs.webp',
+    'rest apis': null,
+    'rest api': null,
+    'graphql': null,
+    'websockets': null,
+    'postgresql': '/textures/skills/postgresql.webp',
+    'postgres': '/textures/skills/postgresql.webp',
+    'mongodb': '/textures/skills/mongodb.webp',
+    'redis': '/textures/skills/redis.webp',
+    'supabase': '/textures/skills/supabase.webp',
+    'pinecone vector db': null,
+    'pinecone': null,
+    'docker': '/textures/skills/docker.webp',
+    'github actions': '/textures/skills/github-light.webp',
+    'github': '/textures/skills/github-light.webp',
+    'aws cloud': '/textures/skills/aws.webp',
+    'aws': '/textures/skills/aws.webp',
+    'linux': null,
+    'vercel': '/textures/skills/nextjs-light.webp',
+    'vite': '/textures/skills/vite.webp',
+    'solidity': '/textures/skills/solidity.webp',
+    'smart contracts': '/textures/skills/solidity.webp',
+    'web3.js': '/textures/skills/ethereum.webp',
+    'web3': '/textures/skills/ethereum.webp',
+    'ethers.js': '/textures/skills/ethereum.webp',
+    'ipfs': null,
+    'ethereum': '/textures/skills/ethereum.webp',
+};
+
+export const getSkillLogo = (name) => {
+    if (!name) return null;
+    const clean = name.toLowerCase().trim();
+    if (Object.prototype.hasOwnProperty.call(SKILL_LOGO_MAP, clean)) {
+        return SKILL_LOGO_MAP[clean];
+    }
+    return null;
+};
+
+export const SKILLS_DATA = [
+    // 1. AI / ML
+    { id: 'skill-python', name: 'Python', category: 'AI / ML', logo: '/textures/skills/python.webp', fallbackText: 'PY', color: '#3776AB' },
+    { id: 'skill-pytorch', name: 'PyTorch', category: 'AI / ML', logo: '/textures/skills/pytorch.webp', fallbackText: 'TORCH', color: '#EE4C2C' },
+    { id: 'skill-tensorflow', name: 'TensorFlow', category: 'AI / ML', logo: '/textures/skills/tensorflow.webp', fallbackText: 'TF', color: '#FF6F00' },
+    { id: 'skill-langchain', name: 'LangChain', category: 'AI / ML', logo: '/textures/skills/langchain-color.webp', fallbackText: 'LC', color: '#1C3C3C' },
+    { id: 'skill-huggingface', name: 'Hugging Face', category: 'AI / ML', logo: '/textures/skills/huggingface-color.webp', fallbackText: 'HF', color: '#FFD21E' },
+    { id: 'skill-opencv', name: 'OpenCV', category: 'AI / ML', logo: null, fallbackText: 'CV', color: '#5C3EE8' },
+    { id: 'skill-llm', name: 'LLM Fine-tuning', category: 'AI / ML', logo: null, fallbackText: 'LLM', color: '#10A37F' },
+
+    // 2. Frontend
+    { id: 'skill-react', name: 'React', category: 'Frontend', logo: '/textures/skills/react.webp', fallbackText: 'REACT', color: '#61DAFB' },
+    { id: 'skill-nextjs', name: 'Next.js', category: 'Frontend', logo: '/textures/skills/nextjs-light.webp', fallbackText: 'NEXT', color: '#000000' },
+    { id: 'skill-threejs', name: 'Three.js', category: 'Frontend', logo: '/textures/skills/threejs.png', fallbackText: '3JS', color: '#049EF4' },
+    { id: 'skill-r3f', name: 'React Three Fiber', category: 'Frontend', logo: '/textures/skills/threejs.png', fallbackText: 'R3F', color: '#F64F59' },
+    { id: 'skill-typescript', name: 'TypeScript', category: 'Frontend', logo: '/textures/skills/typescript.png', fallbackText: 'TS', color: '#3178C6' },
+    { id: 'skill-tailwind', name: 'TailwindCSS', category: 'Frontend', logo: '/textures/skills/tailwind.webp', fallbackText: 'CSS', color: '#38BDF8' },
+    { id: 'skill-gsap', name: 'GSAP', category: 'Frontend', logo: '/textures/about/GSAPduzybalon.webp', fallbackText: 'GSAP', color: '#88CE02' },
+    { id: 'skill-javascript', name: 'JavaScript', category: 'Frontend', logo: '/textures/skills/javascript.webp', fallbackText: 'JS', color: '#F7DF1E' },
+
+    // 3. Backend
+    { id: 'skill-fastapi', name: 'FastAPI', category: 'Backend', logo: '/textures/skills/fastapi.webp', fallbackText: 'API', color: '#059669' },
+    { id: 'skill-nodejs', name: 'Node.js', category: 'Backend', logo: '/textures/skills/nodejs.webp', fallbackText: 'NODE', color: '#339933' },
+    { id: 'skill-express', name: 'Express', category: 'Backend', logo: '/textures/skills/nodejs.webp', fallbackText: 'EX', color: '#444444' },
+    { id: 'skill-rest', name: 'REST APIs', category: 'Backend', logo: null, fallbackText: 'REST', color: '#2563EB' },
+    { id: 'skill-graphql', name: 'GraphQL', category: 'Backend', logo: null, fallbackText: 'GQL', color: '#E10098' },
+    { id: 'skill-websockets', name: 'WebSockets', category: 'Backend', logo: null, fallbackText: 'WS', color: '#010101' },
+
+    // 4. Databases
+    { id: 'skill-postgresql', name: 'PostgreSQL', category: 'Databases', logo: '/textures/skills/postgresql.webp', fallbackText: 'PG', color: '#4169E1' },
+    { id: 'skill-mongodb', name: 'MongoDB', category: 'Databases', logo: '/textures/skills/mongodb.webp', fallbackText: 'MDB', color: '#47A248' },
+    { id: 'skill-redis', name: 'Redis', category: 'Databases', logo: '/textures/skills/redis.webp', fallbackText: 'RDS', color: '#DC382D' },
+    { id: 'skill-supabase', name: 'Supabase', category: 'Databases', logo: '/textures/skills/supabase.webp', fallbackText: 'SB', color: '#3ECF8E' },
+    { id: 'skill-pinecone', name: 'Pinecone Vector DB', category: 'Databases', logo: null, fallbackText: 'VDB', color: '#000000' },
+
+    // 5. DevOps & Cloud
+    { id: 'skill-docker', name: 'Docker', category: 'DevOps & Cloud', logo: '/textures/skills/docker.webp', fallbackText: 'DKR', color: '#2496ED' },
+    { id: 'skill-github', name: 'GitHub Actions', category: 'DevOps & Cloud', logo: '/textures/skills/github-light.webp', fallbackText: 'GIT', color: '#2088FF' },
+    { id: 'skill-aws', name: 'AWS Cloud', category: 'DevOps & Cloud', logo: '/textures/skills/aws.webp', fallbackText: 'AWS', color: '#FF9900' },
+    { id: 'skill-linux', name: 'Linux', category: 'DevOps & Cloud', logo: null, fallbackText: 'LNX', color: '#FCC624' },
+    { id: 'skill-vercel', name: 'Vercel', category: 'DevOps & Cloud', logo: '/textures/skills/nextjs-light.webp', fallbackText: 'VER', color: '#000000' },
+    { id: 'skill-vite', name: 'Vite', category: 'DevOps & Cloud', logo: '/textures/skills/vite.webp', fallbackText: 'VITE', color: '#646CFF' },
+
+    // 6. Web3
+    { id: 'skill-solidity', name: 'Solidity', category: 'Web3', logo: '/textures/skills/solidity.webp', fallbackText: 'SOL', color: '#363636' },
+    { id: 'skill-smartcontracts', name: 'Smart Contracts', category: 'Web3', logo: '/textures/skills/solidity.webp', fallbackText: 'SC', color: '#627EEA' },
+    { id: 'skill-web3js', name: 'Web3.js', category: 'Web3', logo: '/textures/skills/ethereum.webp', fallbackText: 'W3', color: '#F16822' },
+    { id: 'skill-ethers', name: 'Ethers.js', category: 'Web3', logo: '/textures/skills/ethereum.webp', fallbackText: 'ETH', color: '#2535A0' },
+    { id: 'skill-ipfs', name: 'IPFS', category: 'Web3', logo: null, fallbackText: 'IPFS', color: '#65C2CB' },
+    { id: 'skill-ethereum', name: 'Ethereum', category: 'Web3', logo: '/textures/skills/ethereum.webp', fallbackText: 'ETH', color: '#627EEA' }
+];
+
