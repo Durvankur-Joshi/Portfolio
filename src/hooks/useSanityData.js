@@ -17,6 +17,7 @@ const cache = {
     content: null,
     awards: null,
     aboutProfile: null,
+    contactProfile: null,
     loading: false,
     loaded: false,
     error: null,
@@ -59,6 +60,18 @@ export const FALLBACK_ABOUT_PROFILE = {
     ],
 };
 
+// ── FALLBACK CONTACT DATA (resume-derived, used when Sanity is unavailable) ──
+export const FALLBACK_CONTACT_PROFILE = {
+    email: 'joshidurvankur.29@gmail.com',
+    phone: '+91 8668382203',
+    githubUrl: 'https://github.com/Durvankur-Joshi',
+    linkedinUrl: 'https://www.linkedin.com/in/durvankur-joshi/',
+    resumeUrl: "https://drive.google.com/file/d/1mg2MlEY98LWOnuFBw8nYjBHbk9uPfRCx/view?usp=drive_link",   // No resume PDF exists yet — safely optional
+    location: 'Pune, India',
+    availability: true,
+    availabilityText: 'Open to AI / Full-Stack opportunities',
+};
+
 let fetchPromise = null;
 const listeners = new Set();
 
@@ -97,7 +110,7 @@ export function loadSanityData() {
 
     fetchPromise = (async () => {
         try {
-            const [projectsData, contentData, awardsData, aboutProfileData] = await Promise.all([
+            const [projectsData, contentData, awardsData, aboutProfileData, contactProfileData] = await Promise.all([
                 // 1. Projects (Galeria)
                 sanityClient.fetch(`
                     *[_type == "galleryProject"] {
@@ -164,6 +177,19 @@ export function loadSanityData() {
                             description,
                             url
                         }
+                    }
+                `),
+                // 5. Contact Profile (singleton)
+                sanityClient.fetch(`
+                    *[_type == "contactProfile"][0] {
+                        email,
+                        phone,
+                        githubUrl,
+                        linkedinUrl,
+                        resumeUrl,
+                        location,
+                        availability,
+                        availabilityText
                     }
                 `)
             ]);
@@ -272,6 +298,22 @@ export function loadSanityData() {
             } else {
                 // Document not yet created in Sanity — use full fallback
                 cache.aboutProfile = FALLBACK_ABOUT_PROFILE;
+            }
+
+            // 5. Contact Profile (singleton) — merge with fallback for missing fields
+            if (contactProfileData) {
+                cache.contactProfile = {
+                    ...FALLBACK_CONTACT_PROFILE,
+                    ...contactProfileData,
+                    // Preserve fallback email/phone/urls if Sanity fields are empty strings
+                    email: contactProfileData.email || FALLBACK_CONTACT_PROFILE.email,
+                    phone: contactProfileData.phone || FALLBACK_CONTACT_PROFILE.phone,
+                    githubUrl: contactProfileData.githubUrl || FALLBACK_CONTACT_PROFILE.githubUrl,
+                    linkedinUrl: contactProfileData.linkedinUrl || FALLBACK_CONTACT_PROFILE.linkedinUrl,
+                };
+            } else {
+                // Document not yet created in Sanity — use full fallback
+                cache.contactProfile = FALLBACK_CONTACT_PROFILE;
             }
 
             // PRELOADING ZDJĘĆ/TEKSTUR Z SANITY
@@ -421,6 +463,27 @@ export function useAboutProfile() {
     }, []);
 
     return aboutProfile;
+}
+
+export function useContactProfile() {
+    const [contactProfile, setContactProfile] = useState(cache.contactProfile || FALLBACK_CONTACT_PROFILE);
+
+    useEffect(() => {
+        loadSanityData();
+
+        if (cache.loaded) {
+            setContactProfile(cache.contactProfile || FALLBACK_CONTACT_PROFILE);
+            return;
+        }
+
+        const handleUpdate = () => {
+            setContactProfile(cache.contactProfile || FALLBACK_CONTACT_PROFILE);
+        };
+
+        return subscribe(handleUpdate);
+    }, []);
+
+    return contactProfile;
 }
 
 // Automatyczne odpalenie pobierania przy załadowaniu modułu JS

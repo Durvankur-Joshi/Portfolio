@@ -32,8 +32,8 @@ const ROOM_META = {
     },
     contact: {
         path: '/contact',
-        title: 'Contact — DURVANKUR Portfolio',
-        description: 'Get in touch with Tomasz "DURVANKUR" Szmajda. Find social media links and contact information in this interactive 3D contact room.',
+        title: 'Contact — Durvankur Joshi Portfolio',
+        description: 'Get in touch with Durvankur Joshi — AI Engineer & Full-Stack Developer based in Pune, India. Reach out via GitHub, LinkedIn, email, or phone through this interactive 3D contact room.',
     },
 };
 

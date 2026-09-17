@@ -419,7 +419,7 @@ const CorridorDecorations = ({ segmentLength, zOffset, corridorWidth = 4, corrid
             height: 2.5 / 1.785,
             y: 0.35,
             id: 'frame-4',
-            signature: "Empty canvas!\nWant your art here?\nContact me!",
+            signature: "To be the best, \n you have to \n do the worst",
             signatureX: 0,
             signatureY: 0,
             signatureSize: 0.12,

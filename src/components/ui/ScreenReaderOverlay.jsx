@@ -1,5 +1,5 @@
 import { useScene } from '../../context/SceneContext';
-import { useGalleryProjects, useStudioContent, useAwards, useAboutProfile } from '../../hooks/useSanityData';
+import { useGalleryProjects, useStudioContent, useAwards, useAboutProfile, useContactProfile } from '../../hooks/useSanityData';
 import '../../styles/ScreenReaderOverlay.scss';
 
 /**
@@ -17,6 +17,7 @@ const ScreenReaderOverlay = () => {
     const studio = useStudioContent();
     const awards = useAwards();
     const aboutProfile = useAboutProfile();
+    const contactProfile = useContactProfile();
 
     return (
         <div className="sr-overlay" role="complementary" aria-label="Accessible navigation for 3D portfolio">
@@ -180,8 +181,54 @@ const ScreenReaderOverlay = () => {
                         )}
                         {currentRoom === 'contact' && (
                             <div aria-label="Contact room content">
-                                <h3>Contact Me</h3>
-                                <p>Find my social media links displayed as floating barrels. Click to visit my profiles on LinkedIn, GitHub, and other platforms.</p>
+                                <h3>Contact Durvankur Joshi</h3>
+                                <p>
+                                    An interactive 3D harbour scene. Floating barrels are clickable contact actions.
+                                    {contactProfile?.location && ` Located in ${contactProfile.location}.`}
+                                    {contactProfile?.availabilityText && ` ${contactProfile.availabilityText}.`}
+                                </p>
+                                <ul>
+                                    {contactProfile?.githubUrl && (
+                                        <li>
+                                            <strong>GitHub</strong>:{' '}
+                                            <a href={contactProfile.githubUrl} target="_blank" rel="noopener noreferrer">
+                                                {contactProfile.githubUrl}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {contactProfile?.linkedinUrl && (
+                                        <li>
+                                            <strong>LinkedIn</strong>:{' '}
+                                            <a href={contactProfile.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                                                {contactProfile.linkedinUrl}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {contactProfile?.email && (
+                                        <li>
+                                            <strong>Email</strong>:{' '}
+                                            <a href={`mailto:${contactProfile.email}`}>
+                                                {contactProfile.email}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {contactProfile?.phone && (
+                                        <li>
+                                            <strong>Phone</strong>:{' '}
+                                            <a href={`tel:${contactProfile.phone.replace(/\s/g, '')}`}>
+                                                {contactProfile.phone}
+                                            </a>
+                                        </li>
+                                    )}
+                                    {contactProfile?.resumeUrl && (
+                                        <li>
+                                            <strong>Resume / CV</strong>:{' '}
+                                            <a href={contactProfile.resumeUrl} target="_blank" rel="noopener noreferrer">
+                                                View Resume
+                                            </a>
+                                        </li>
+                                    )}
+                                </ul>
                             </div>
                         )}
                         {currentRoom === 'studio' && (

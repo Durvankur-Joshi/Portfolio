@@ -9,6 +9,7 @@ import { useScene } from '../../../../context/SceneContext';
 import GalleryClouds from '../Gallery/GalleryClouds';
 import { useAchievements } from '../../../../context/AchievementsContext';
 import { useAudio } from '../../../../context/AudioManager';
+import { useContactProfile } from '../../../../hooks/useSanityData';
 
 // ============================================
 // ============================================
@@ -97,6 +98,9 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const { showTutorial, unlockAchievement, hidePopup } = useAchievements();
     const { globalVolume, isMuted } = useAudio();
     const effectiveVolume = isMuted ? 0 : AUDIO_SETTINGS.volume * globalVolume;
+
+    // ── CONTACT PROFILE (Sanity-backed, with hardcoded fallback) ──
+    const contactProfile = useContactProfile();
 
     const audioRef = useRef();
     useEffect(() => {
@@ -248,10 +252,9 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     }, [hasSignaledReady.current, showRoom, camera]);
 
     const handleMailSelect = () => {
-        // Awaryjne przekierowanie mailto:
-        window.location.href = 'mailto:joshidurvankur.29@gmail.com';
+        // Open the user's mail client with the current contact email
+        window.location.href = `mailto:${contactProfile.email}`;
 
-        
         setShowSelection(false);
 
         // Trigger the look down sequence
@@ -400,11 +403,11 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
             {/* 🛢️ SOCIAL BARRELS (Floating in water) */}
             {/* LINKEDIN */}
             <SocialBarrel
-                position={isMobile ? [-1.2, 0.5, -10] : [-3, 0.5, -10]}
+                position={isMobile ? [-1.2, 0.5, -10] : [-2.5, 0.5, -10]}
                 rotation={[0, 0.2, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="LINKEDIN"
-                onClick={() => window.open('https://www.linkedin.com/in/durvankur-joshi/', '_blank')}
+                onClick={() => window.open(contactProfile.linkedinUrl, '_blank', 'noopener,noreferrer')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
@@ -414,27 +417,40 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 rotation={[0, 0.3, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="GITHUB"
-                onClick={() => window.open('https://github.com/Durvankur-Joshi', '_blank')}
+                onClick={() => window.open(contactProfile.githubUrl, '_blank', 'noopener,noreferrer')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* INSTAGRAM */}
+            {/* PHONE / CONTACT */}
             <SocialBarrel
-                position={isMobile ? [1.5, -0.3, -7] : [5, -0.3, -8]}
+                position={isMobile ? [1.5, -0.3, -7] : [3, -0.3, -8]}
                 rotation={[0, -0.3, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="CONTACT"
-                onClick={() => window.open('8668382203', '_blank')}
+                label="PHONE"
+                onClick={() => { window.location.href = `tel:${contactProfile.phone.replace(/\s/g, '')}`; }}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* MAIL (Triggers animation) */}
+            {/* MAIL (Triggers look-down animation + opens mail client) */}
             <SocialBarrel
                 position={isMobile ? [0, -0.7, -6] : [0, -0.7, -7]}
                 rotation={[0, 0, 0]}
                 texturePath="/textures/contact/beczka.webp"
                 label="MESSAGE"
                 onClick={handleMailSelect}
+                paintOnBeforeCompile={onBeforeCompile}
+                paintUniforms={uniformsData}
+            />
+            {/* RESUME — only clickable when a real resumeUrl exists */}
+            <SocialBarrel
+                position={isMobile ? [1.2, 0.5, -10] : [5.5, 0.4, -10]}
+                rotation={[0, -0.2, 0]}
+                texturePath="/textures/contact/beczka.webp"
+                label="RESUME"
+                onClick={contactProfile.resumeUrl
+                    ? () => window.open(contactProfile.resumeUrl, '_blank', 'noopener,noreferrer')
+                    : undefined
+                }
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />

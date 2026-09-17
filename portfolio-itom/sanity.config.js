@@ -24,9 +24,17 @@ export default defineConfig({
                   .schemaType('globalInfo')
                   .documentId('globalInfo')
               ),
+            S.listItem()
+              .title('Contact Profile')
+              .id('contactProfile')
+              .child(
+                S.document()
+                  .schemaType('contactProfile')
+                  .documentId('contactProfile')
+              ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['globalInfo'].includes(listItem.getId())
+              (listItem) => !['globalInfo', 'contactProfile'].includes(listItem.getId())
             ),
           ]),
     }),
