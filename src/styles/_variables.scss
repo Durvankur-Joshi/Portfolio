@@ -1,35 +1,61 @@
 // =============================================================================
 // DESIGN TOKENS - DURVANKUR Portfolio
+// INK × SPIDER RED Color System
 // =============================================================================
 
-// Colors
-$color-white: #FFFFFF;
-$color-black: #0A0A0A;
-$color-gray: #1A1A1A;
-$color-neon-green: #39FF14;
+// ── PAPER TONES ───────────────────────────────────────────────────────────────
+$color-paper:            #F4F1EA;   // Warm off-white — primary background
+$color-paper-light:      #FAF9F5;   // Lightest paper — ceilings, light surfaces
 
-// Typography
-$font-title: 'Gloria Hallelujah', cursive;
+// ── INK TONES ─────────────────────────────────────────────────────────────────
+$color-ink:              #151515;   // Darkest ink — primary text, key outlines
+$color-ink-soft:         #292929;   // Secondary ink — borders, icons, strokes
+$color-muted:            #6B6B6B;   // Muted gray — secondary text, hints
+
+// ── SPIDER RED ────────────────────────────────────────────────────────────────
+$color-spider-red:       #D71920;   // Primary brand accent
+$color-spider-red-dark:  #9E1118;   // Hover / pressed state
+
+// ── TECH BLUE ─────────────────────────────────────────────────────────────────
+$color-tech-blue:        #2563EB;   // Sparingly — AI/technical indicators
+
+// ── BASE ──────────────────────────────────────────────────────────────────────
+$color-white:            #FFFFFF;   // Pure white — overlays, text on dark
+$color-black:            #151515;   // Alias for ink — body text
+
+// ── BACKWARDS-COMPATIBLE ALIASES (prevent regressions) ───────────────────────
+// These map old variable names to new semantic values.
+// Do not delete; components reference them via SCSS @use.
+$color-gray:             $color-ink-soft;
+
+// ── WARM ACCENT NEUTRALS (used in dividers, grids, scrollbars) ───────────────
+$color-warm-divider:     #C8C3BA;
+$color-warm-grid-center: #C8C3BA;
+$color-warm-grid-sub:    #D4CFC6;
+$color-warm-border:      #E0DBD3;
+
+// ── TYPOGRAPHY ────────────────────────────────────────────────────────────────
+$font-title:       'Gloria Hallelujah', cursive;
 $font-handwritten: 'Caveat', cursive;
-$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-primary:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-// Breakpoints
-$breakpoint-mobile: 480px;
-$breakpoint-tablet: 768px;
+// ── BREAKPOINTS ───────────────────────────────────────────────────────────────
+$breakpoint-mobile:  480px;
+$breakpoint-tablet:  768px;
 $breakpoint-desktop: 1024px;
-$breakpoint-wide: 1440px;
+$breakpoint-wide:    1440px;
 
-// Z-index layers
+// ── Z-INDEX LAYERS ────────────────────────────────────────────────────────────
 $z-preloader: 100;
-$z-canvas: 1;
-$z-ui: 50;
+$z-canvas:    1;
+$z-ui:        50;
 
-// Transitions
-$transition-fast: 0.2s ease;
+// ── TRANSITIONS ───────────────────────────────────────────────────────────────
+$transition-fast:   0.2s ease;
 $transition-normal: 0.4s ease;
-$transition-slow: 0.8s ease;
+$transition-slow:   0.8s ease;
 
-// Spacing
+// ── SPACING ───────────────────────────────────────────────────────────────────
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 2rem;

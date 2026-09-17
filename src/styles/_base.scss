@@ -24,8 +24,8 @@ html {
 
 body {
     font-family: $font-primary;
-    background-color: #fafafa;
-    color: $color-black;
+    background-color: $color-paper-light;
+    color: $color-ink;
     overflow: hidden; // No scroll - 3D handles it
     @include smooth-text;
     @include hide-scrollbar;
@@ -70,12 +70,12 @@ body {
     &__text {
         font-family: $font-handwritten;
         font-size: 1rem;
-        color: #666;
+        color: $color-muted;
     }
 
     &__arrow {
         font-size: 1.5rem;
-        color: $color-black;
+        color: $color-ink;
         animation: bounce 2s ease infinite;
     }
 }
@@ -89,11 +89,11 @@ body {
     p {
         font-family: $font-handwritten;
         font-size: 0.9rem;
-        color: #888;
-        background: rgba(255, 255, 255, 0.9);
+        color: $color-muted;
+        background: rgba(250, 249, 245, 0.92);
         padding: 0.5rem 1rem;
         border-radius: 20px;
-        border: 1px solid #eee;
+        border: 1px solid $color-warm-border;
     }
 
     @include mobile {

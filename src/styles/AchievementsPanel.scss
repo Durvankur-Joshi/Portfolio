@@ -20,7 +20,7 @@
         position: relative;
         width: 100%;
         padding: 18px 16px 20px;
-        background: #ffffff;
+        background: #FAF9F5;
         overflow: hidden;
 
         &::before {
@@ -61,7 +61,7 @@
         align-items: center;
         margin-bottom: 12px;
         padding-bottom: 8px;
-        border-bottom: 2px dashed #bbb;
+        border-bottom: 2px dashed #C8C3BA;
         position: relative;
         z-index: 1;
 
@@ -70,7 +70,7 @@
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: #1a1a1a;
+            color: #292929;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -89,7 +89,7 @@
             svg {
                 width: 14px;
                 height: 14px;
-                stroke: #1a1a1a;
+                stroke: #292929;
                 stroke-width: 2.5;
                 fill: none;
                 stroke-linecap: round;
@@ -118,14 +118,14 @@
 
         // Custom scrollbar
         scrollbar-width: thin;
-        scrollbar-color: #ccc transparent;
+        scrollbar-color: #C8C3BA transparent;
 
         &::-webkit-scrollbar {
             width: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: #ccc;
+            background-color: #C8C3BA;
             border-radius: 2px;
         }
     }
@@ -140,11 +140,11 @@
             opacity: 0.5;
 
             .achievement-title {
-                color: #555;
+                color: #6B6B6B;
             }
 
             .achievement-label {
-                color: #777;
+                color: #6B6B6B;
             }
         }
 
@@ -170,14 +170,14 @@
                 font-family: 'Patrick Hand', cursive, sans-serif;
                 font-size: 14px;
                 font-weight: 700;
-                color: #1a1a1a;
+                color: #292929;
                 letter-spacing: 0.5px;
                 margin-bottom: 1px;
             }
 
             .achievement-label {
                 font-size: 12px;
-                color: #444;
+                color: #3D3D3D;
                 line-height: 1.2;
             }
         }
@@ -186,13 +186,13 @@
     .achievements-footer {
         margin-top: 12px;
         padding-top: 10px;
-        border-top: 2px dashed #bbb;
+        border-top: 2px dashed #C8C3BA;
         text-align: center;
         font-family: 'Patrick Hand', cursive, sans-serif;
         font-weight: bold;
         font-size: 12px;
         letter-spacing: 1px;
-        color: #1a1a1a;
+        color: #292929;
         position: relative;
         z-index: 1;
     }

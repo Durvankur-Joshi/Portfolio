@@ -80,7 +80,7 @@
         width: 22px;
         height: 22px;
         fill: none;
-        stroke: #1a1a1a;
+        stroke: #292929;
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -167,7 +167,7 @@
             display: block;
             height: 2px;
             width: 100%;
-            background: #1a1a1a;
+            background: #292929;
             border-radius: 2px;
         }
     }
@@ -202,7 +202,7 @@
         height: 100%;
         padding: 20px;
         padding-bottom: 30px;
-        background: #ffffff;
+        background: #FAF9F5;
 
         &::before {
             content: '';
@@ -237,7 +237,7 @@
         align-items: center;
         margin-bottom: 16px;
         padding-bottom: 12px;
-        border-bottom: 2px dashed #ccc;
+        border-bottom: 2px dashed #C8C3BA;
 
         h3 {
             margin: 0;
@@ -245,7 +245,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #1a1a1a;
+            color: #292929;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -265,7 +265,7 @@
                 width: 18px;
                 height: 18px;
                 fill: none;
-                stroke: #1a1a1a;
+                stroke: #292929;
                 stroke-width: 2.5;
                 stroke-linecap: round;
             }
@@ -367,7 +367,7 @@
         font-family: 'Cabin Sketch', cursive, sans-serif;
         font-size: 1.2rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: #292929;
         pointer-events: none;
         z-index: 4;
         text-transform: uppercase;
@@ -376,10 +376,10 @@
         text-align: center;
         // Text outline for better readability
         text-shadow:
-            -1px -1px 0 #fff,
-            1px -1px 0 #fff,
-            -1px 1px 0 #fff,
-            1px 1px 0 #fff;
+            -1px -1px 0 #FAF9F5,
+            1px -1px 0 #FAF9F5,
+            -1px 1px 0 #FAF9F5,
+            1px 1px 0 #FAF9F5;
 
         &.about {
             top: 28%;
@@ -425,7 +425,7 @@
         }
 
         &.active {
-            filter: drop-shadow(0 0 4px rgba(200, 50, 50, 0.5));
+            filter: drop-shadow(0 0 4px rgba(215, 25, 32, 0.5));
         }
     }
 
@@ -470,7 +470,7 @@
         position: relative;
         width: 100%;
         padding: 18px 16px 20px;
-        background: #ffffff;
+        background: #FAF9F5;
         overflow: hidden;
 
         // Paper texture
@@ -514,7 +514,7 @@
         align-items: center;
         margin-bottom: 12px;
         padding-bottom: 8px;
-        border-bottom: 2px dashed #bbb;
+        border-bottom: 2px dashed #C8C3BA;
         position: relative;
         z-index: 1;
 
@@ -523,7 +523,7 @@
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: #1a1a1a;
+            color: #292929;
             font-family: 'Patrick Hand', cursive, sans-serif;
         }
 
@@ -542,7 +542,7 @@
             svg {
                 width: 14px;
                 height: 14px;
-                stroke: #1a1a1a;
+                stroke: #292929;
                 stroke-width: 2.5;
                 fill: none;
                 stroke-linecap: round;
@@ -576,7 +576,7 @@
                 justify-content: space-between;
                 font-family: 'Patrick Hand', cursive, sans-serif;
                 font-size: 14px;
-                color: #1a1a1a;
+                color: #292929;
                 font-weight: 600;
             }
 
@@ -584,7 +584,7 @@
                 appearance: none;
                 width: 100%;
                 height: 4px;
-                background: #ccc;
+                background: #C8C3BA;
                 border-radius: 2px;
                 outline: none;
                 cursor: pointer;
@@ -594,7 +594,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #1a1a1a;
+                    background: #292929;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                 }
@@ -603,7 +603,7 @@
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
-                    background: #1a1a1a;
+                    background: #292929;
                     cursor: pointer;
                     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
                     border: none;
@@ -643,12 +643,12 @@
     display: flex;
     gap: 24px;
     padding: 16px 24px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #1a1a1a;
+    background: rgba(244, 241, 234, 0.92);
+    border: 2px solid #292929;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #1a1a1a;
+    box-shadow: 3px 3px 0 #292929;
     font-size: 14px;
-    color: #1a1a1a;
+    color: #292929;
     pointer-events: auto;
     animation: hintFadeIn 0.5s ease-out;
 
@@ -668,12 +668,12 @@
     display: flex;
     gap: 24px;
     padding: 16px 24px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #1a1a1a;
+    background: rgba(244, 241, 234, 0.92);
+    border: 2px solid #292929;
     border-radius: 12px;
-    box-shadow: 3px 3px 0 #1a1a1a;
+    box-shadow: 3px 3px 0 #292929;
     font-size: 14px;
-    color: #1a1a1a;
+    color: #292929;
     pointer-events: auto;
     animation: corridorHintFadeIn 0.5s ease-out, corridorHintFadeOut 0.5s ease-out 3.5s forwards;
 

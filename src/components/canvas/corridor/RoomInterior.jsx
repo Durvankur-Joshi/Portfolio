@@ -85,14 +85,14 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
         bbRight.repeat.set(corridorDepth / NATURAL_TILE_W, 1);
 
         return {
-            corridorFloor: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: floorTex, side: THREE.DoubleSide }),
-            corridorWallL: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexL, side: THREE.DoubleSide }),
-            corridorWallR: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: wallTexR, side: THREE.DoubleSide }),
-            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: ceilTex, side: THREE.DoubleSide }),
-            bbLeft: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbLeft, side: THREE.DoubleSide }),
-            bbRight: new THREE.MeshBasicMaterial({ color: '#e0e0e0', map: bbRight, side: THREE.DoubleSide }),
-            threshold: new THREE.MeshBasicMaterial({
-                color: '#e0e0e0',
+            corridorFloor:   new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: floorTex, side: THREE.DoubleSide }),
+            corridorWallL:   new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: wallTexL, side: THREE.DoubleSide }),
+            corridorWallR:   new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: wallTexR, side: THREE.DoubleSide }),
+            corridorCeiling: new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: ceilTex, side: THREE.DoubleSide }),
+            bbLeft:          new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: bbLeft, side: THREE.DoubleSide }),
+            bbRight:         new THREE.MeshBasicMaterial({ color: '#F4F1EA', map: bbRight, side: THREE.DoubleSide }),
+            threshold:       new THREE.MeshBasicMaterial({
+                color: '#F4F1EA',
                 map: (() => {
                     const t = bbTexSrc.clone();
                     t.needsUpdate = true;
@@ -104,10 +104,10 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                 side: THREE.DoubleSide
             }),
             // Room materials (keep flat for rooms that have their own content)
-            roomFloor: new THREE.MeshBasicMaterial({ color: '#e5e5e5', side: THREE.DoubleSide }),
-            roomCeiling: new THREE.MeshBasicMaterial({ color: '#fafafa', side: THREE.DoubleSide }),
-            roomWall: new THREE.MeshBasicMaterial({ color: '#f0f0f0', side: THREE.DoubleSide }),
-            roomBackWall: new THREE.MeshBasicMaterial({ color: '#f5f5f5', side: THREE.DoubleSide }),
+            roomFloor:    new THREE.MeshBasicMaterial({ color: '#F4F1EA', side: THREE.DoubleSide }),
+            roomCeiling:  new THREE.MeshBasicMaterial({ color: '#FAF9F5', side: THREE.DoubleSide }),
+            roomWall:     new THREE.MeshBasicMaterial({ color: '#F4F1EA', side: THREE.DoubleSide }),
+            roomBackWall: new THREE.MeshBasicMaterial({ color: '#FAF9F5', side: THREE.DoubleSide }),
         };
     }, [floorTexSrc, wallTexSrc, ceilingTexSrc, bbTexSrc]);
 
@@ -233,9 +233,9 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                                 material={materials.roomFloor}
                             />
 
-                            {/* Floor grid */}
+                            {/* Floor grid — warm pencil lines */}
                             <gridHelper
-                                args={[Math.min(roomWidth, roomDepth), 20, '#cccccc', '#dddddd']}
+                                args={[Math.min(roomWidth, roomDepth), 20, '#C8C3BA', '#D4CFC6']}
                                 position={[0, -roomHeight / 2 + 0.01, 0]}
                             />
 
@@ -274,7 +274,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                             <Text
                                 position={[0, 2, -roomDepth / 2 + 2]}
                                 fontSize={4}
-                                color="#1a1a1a"
+                                color="#151515"
                                 anchorX="center"
                                 anchorY="middle"
                                 maxWidth={roomWidth * 0.8}
@@ -287,7 +287,7 @@ const RoomInterior = memo(({ label, showRoom, onReady, isExiting }) => {
                             <Text
                                 position={[0, -1, -roomDepth / 2 + 2]}
                                 fontSize={0.8}
-                                color="#666666"
+                                color="#6B6B6B"
                                 anchorX="center"
                                 anchorY="middle"
                                 maxWidth={roomWidth * 0.7}

@@ -50,18 +50,17 @@
             width: 100%;
             height: 3px;
             cursor: pointer;
-            background: #1a1a1a;
+            background: #292929;
             border-radius: 2px;
             // Make it look slightly imperfect/drawn
-            border-top: 1px solid #1a1a1a;
-            box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid #292929;
         }
 
         &::-moz-range-track {
             width: 100%;
             height: 3px;
             cursor: pointer;
-            background: #1a1a1a;
+            background: #292929;
             border-radius: 2px;
         }
 
@@ -71,11 +70,11 @@
             height: 14px;
             width: 14px;
             border-radius: 50%;
-            background: #1a1a1a;
+            background: #292929;
             cursor: pointer;
             margin-top: -6px;
             /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-            box-shadow: 0 0 0 2px #fafafa; // White outline to separate from track
+            box-shadow: 0 0 0 2px #FAF9F5; // Warm paper outline to separate from track
             transition: transform 0.1s;
 
             &:hover {
@@ -88,9 +87,9 @@
             width: 14px;
             border: none;
             border-radius: 50%;
-            background: #1a1a1a;
+            background: #292929;
             cursor: pointer;
-            box-shadow: 0 0 0 2px #fafafa;
+            box-shadow: 0 0 0 2px #FAF9F5;
             transition: transform 0.1s;
 
             &:hover {
@@ -120,7 +119,7 @@
             width: 28px;
             height: 28px;
             fill: none;
-            stroke: #1a1a1a;
+            stroke: #292929;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;

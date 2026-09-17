@@ -143,9 +143,9 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
                     position={[letter.baseX, 0.2, 0]}
                     fontSize={0.9}
                     font={RUBIK_SCRIBBLE_URL}
-                    color="#db0202ff"
+                    color="#D71920"
                     outlineWidth={0.012}
-                    outlineColor="#1a1a1a"
+                    outlineColor="#151515"
                     anchorX="center"
                     anchorY="middle"
                     letterSpacing={0}
@@ -162,7 +162,7 @@ const HeroText = ({ position = [0, 0.3, 0] }) => {
                     position={[word.baseX, -0.55, 0.3]}
                     fontSize={0.16}
                     font={CABIN_SKETCH_URL}
-                    color="#555555"
+                    color="#6B6B6B"
                     anchorX="center"
                     anchorY="middle"
                     letterSpacing={0.04}
@@ -193,7 +193,7 @@ const SmallStar = ({ position, scale = 0.1 }) => {
             {[0, 1, 2, 3].map((i) => (
                 <mesh key={i} rotation={[0, 0, (i * Math.PI) / 4]}>
                     <planeGeometry args={[1, 0.12]} />
-                    <meshBasicMaterial color="#333" transparent opacity={0.6} side={2} />
+                    <meshBasicMaterial color="#292929" transparent opacity={0.6} side={2} />
                 </mesh>
             ))}
         </group>
