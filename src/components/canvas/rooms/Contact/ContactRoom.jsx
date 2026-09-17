@@ -251,7 +251,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         // Awaryjne przekierowanie mailto:
         window.location.href = 'mailto:joshidurvankur.29@gmail.com';
 
-        /* 
+        
         setShowSelection(false);
 
         // Trigger the look down sequence
@@ -283,7 +283,7 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         setTimeout(() => {
             setCurrentPhase(PHASE.WRITING);
         }, 1500);
-        */
+    
     };
 
     // Frame Loop
@@ -418,23 +418,13 @@ const ContactRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />
-            {/* FACEBOOK */}
-            <SocialBarrel
-                position={isMobile ? [1.2, 0.5, -10] : [3, 0.5, -10]}
-                rotation={[0, -0.2, 0]}
-                texturePath="/textures/contact/beczka.webp"
-                label="X"
-                onClick={() => window.open('https://www.facebook.com/people/DURVANKUR/61586563487664/', '_blank')}
-                paintOnBeforeCompile={onBeforeCompile}
-                paintUniforms={uniformsData}
-            />
             {/* INSTAGRAM */}
             <SocialBarrel
                 position={isMobile ? [1.5, -0.3, -7] : [5, -0.3, -8]}
                 rotation={[0, -0.3, 0]}
                 texturePath="/textures/contact/beczka.webp"
-                label="INSTAGRAM"
-                onClick={() => window.open('https://www.instagram.com/DURVANKUR.dev/', '_blank')}
+                label="CONTACT"
+                onClick={() => window.open('8668382203', '_blank')}
                 paintOnBeforeCompile={onBeforeCompile}
                 paintUniforms={uniformsData}
             />

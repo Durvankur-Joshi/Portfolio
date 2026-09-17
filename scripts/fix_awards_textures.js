@@ -9,7 +9,7 @@ const SOTD_FILES = [
   'SOTDAYYOUNGMULTICSSWINNER.webp',
   'SOTDAYYOUNGMULTIDESIGNNOMINESS.webp',
   'SOTDAYYOUNGMULTIGSAP.webp',
-  'SOTDAYYOUNGMULTIORPETRON.webp'
+  'Lamatic.webp'
 ];
 
 async function fixAwardsToSquarePOT() {

@@ -16,9 +16,47 @@ const cache = {
     projects: null,
     content: null,
     awards: null,
+    aboutProfile: null,
     loading: false,
     loaded: false,
     error: null,
+};
+
+// ── FALLBACK ABOUT DATA (resume-derived, used when Sanity is unavailable) ──
+export const FALLBACK_ABOUT_PROFILE = {
+    name: 'DURVANKUR JOSHI',
+    headline: 'Computer Engineering Student • AI & Full-Stack Developer',
+    bio: 'Computer Engineering student at Government College of Engineering & Research, Pune. Building AI-powered and Web3 applications. Contributed to Lamatic AgentKit with an AI Career Copilot.',
+    education: [
+        {
+            institution: 'Government College of Engineering & Research, Pune',
+            degree: 'Computer Engineering',
+            score: 'CGPA: 8.36',
+            period: '2025–2028',
+        },
+        {
+            institution: 'Ashok Institute of Engineering & Technology, Shrirampur',
+            degree: 'Diploma Computer Engineering',
+            score: '87.54%',
+            period: '2022–2025',
+        },
+    ],
+    highlights: [
+        { title: 'FarmerChain', description: 'Decentralized Agricultural Supply Chain & Trust Protocol', type: 'project' },
+        { title: 'MedVault', description: 'Zero-Knowledge Medical History Ledger', type: 'project' },
+        { title: 'AdaptLearn', description: 'AI-Powered Adaptive Learning Platform', type: 'project' },
+    ],
+    openSource: [
+        {
+            title: 'Lamatic AgentKit',
+            description: 'AI-powered Career Copilot',
+            features: ['Skill Analysis', 'Role Recommendations', 'Roadmap', 'Projects', 'Interview Questions'],
+            url: null,
+        },
+    ],
+    achievements: [
+        { title: 'Web Wizard 2.0', description: '1st Place', url: null },
+    ],
 };
 
 let fetchPromise = null;
@@ -59,7 +97,7 @@ export function loadSanityData() {
 
     fetchPromise = (async () => {
         try {
-            const [projectsData, contentData, awardsData] = await Promise.all([
+            const [projectsData, contentData, awardsData, aboutProfileData] = await Promise.all([
                 // 1. Projects (Galeria)
                 sanityClient.fetch(`
                     *[_type == "galleryProject"] {
@@ -97,6 +135,36 @@ export function loadSanityData() {
                         date,
                         url
                     } | order(date desc)
+                `),
+                // 4. About Profile (singleton)
+                sanityClient.fetch(`
+                    *[_type == "aboutProfile"][0] {
+                        name,
+                        headline,
+                        bio,
+                        education[] {
+                            institution,
+                            degree,
+                            score,
+                            period
+                        },
+                        highlights[] {
+                            title,
+                            description,
+                            type
+                        },
+                        openSource[] {
+                            title,
+                            description,
+                            features,
+                            url
+                        },
+                        achievements[] {
+                            title,
+                            description,
+                            url
+                        }
+                    }
                 `)
             ]);
 
@@ -181,6 +249,29 @@ export function loadSanityData() {
                         platformConfig: { label: 'PRESTIGE', color: '#1a1a1a', icon: '👑' }
                     }
                 };
+            }
+
+            // 4. About Profile (singleton) — merge with fallback for missing fields
+            if (aboutProfileData) {
+                cache.aboutProfile = {
+                    ...FALLBACK_ABOUT_PROFILE,
+                    ...aboutProfileData,
+                    education: (aboutProfileData.education && aboutProfileData.education.length > 0)
+                        ? aboutProfileData.education
+                        : FALLBACK_ABOUT_PROFILE.education,
+                    highlights: (aboutProfileData.highlights && aboutProfileData.highlights.length > 0)
+                        ? aboutProfileData.highlights
+                        : FALLBACK_ABOUT_PROFILE.highlights,
+                    openSource: (aboutProfileData.openSource && aboutProfileData.openSource.length > 0)
+                        ? aboutProfileData.openSource
+                        : FALLBACK_ABOUT_PROFILE.openSource,
+                    achievements: (aboutProfileData.achievements && aboutProfileData.achievements.length > 0)
+                        ? aboutProfileData.achievements
+                        : FALLBACK_ABOUT_PROFILE.achievements,
+                };
+            } else {
+                // Document not yet created in Sanity — use full fallback
+                cache.aboutProfile = FALLBACK_ABOUT_PROFILE;
             }
 
             // PRELOADING ZDJĘĆ/TEKSTUR Z SANITY
@@ -309,6 +400,27 @@ export function useAwards() {
     }, []);
 
     return awardsData;
+}
+
+export function useAboutProfile() {
+    const [aboutProfile, setAboutProfile] = useState(cache.aboutProfile || FALLBACK_ABOUT_PROFILE);
+
+    useEffect(() => {
+        loadSanityData();
+
+        if (cache.loaded) {
+            setAboutProfile(cache.aboutProfile || FALLBACK_ABOUT_PROFILE);
+            return;
+        }
+
+        const handleUpdate = () => {
+            setAboutProfile(cache.aboutProfile || FALLBACK_ABOUT_PROFILE);
+        };
+
+        return subscribe(handleUpdate);
+    }, []);
+
+    return aboutProfile;
 }
 
 // Automatyczne odpalenie pobierania przy załadowaniu modułu JS

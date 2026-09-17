@@ -19,6 +19,7 @@ Directory structure:
     │   ├── sanity.cli.js
     │   ├── sanity.config.js
     │   ├── schemaTypes/
+    │   │   ├── aboutProfile.js
     │   │   ├── awardCertificate.js
     │   │   ├── faq.js
     │   │   ├── galleryProject.js
@@ -93,7 +94,6 @@ Directory structure:
     │       │   ├── SOTDAYYOUNGMULTICSSWINNER.webp
     │       │   ├── SOTDAYYOUNGMULTIDESIGNNOMINESS.webp
     │       │   ├── SOTDAYYOUNGMULTIGSAP.webp
-    │       │   ├── SOTDAYYOUNGMULTIORPETRON.webp
     │       │   ├── SOTM.webp
     │       │   ├── SOTM_painted.webp
     │       │   ├── SOTY.webp
@@ -1713,6 +1713,205 @@ export default defineConfig({
 
 
 ================================================
+FILE: portfolio-itom/schemaTypes/aboutProfile.js
+================================================
+/**
+ * aboutProfile â€” Singleton Sanity document for the About room content.
+ *
+ * Manages the text content displayed in the 3D sky/flight story milestones.
+ * Separate from globalInfo (which handles site-wide SEO + social URLs).
+ *
+ * Singleton: Only one document of this type should exist.
+ */
+export default {
+  name: 'aboutProfile',
+  title: 'About Profile',
+  type: 'document',
+  fields: [
+    // â”€â”€ PROFILE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    {
+      name: 'name',
+      title: 'Full Name',
+      type: 'string',
+      description: 'Displayed in the Intro milestone (e.g. DURVANKUR JOSHI)',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'headline',
+      title: 'Headline',
+      type: 'string',
+      description: 'Short descriptor below name (e.g. Computer Engineering Student â€¢ AI & Full-Stack Developer)',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'bio',
+      title: 'Bio (SEO / Accessibility)',
+      type: 'text',
+      description: 'Short bio â€” used in the accessibility layer (screen readers / SEO). Not displayed in 3D.',
+    },
+
+    // â”€â”€ EDUCATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    {
+      name: 'education',
+      title: 'Education',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'institution',
+              title: 'Institution',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'degree',
+              title: 'Degree / Program',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'score',
+              title: 'Score (CGPA / Percentage)',
+              type: 'string',
+            },
+            {
+              name: 'period',
+              title: 'Period (e.g. 2022â€“2025)',
+              type: 'string',
+            },
+          ],
+          preview: {
+            select: { title: 'institution', subtitle: 'degree' },
+          },
+        },
+      ],
+    },
+
+    // â”€â”€ HIGHLIGHTS (Journey / Projects shown in story) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    {
+      name: 'highlights',
+      title: 'Journey Highlights',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+            },
+            {
+              name: 'type',
+              title: 'Type',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Project', value: 'project' },
+                  { title: 'Open Source', value: 'opensource' },
+                  { title: 'Achievement', value: 'achievement' },
+                  { title: 'Focus Area', value: 'focus' },
+                ],
+                layout: 'radio',
+              },
+            },
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'type' },
+          },
+        },
+      ],
+    },
+
+    // â”€â”€ OPEN SOURCE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    {
+      name: 'openSource',
+      title: 'Open Source Contributions',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Project Name',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+            },
+            {
+              name: 'features',
+              title: 'Features / Key Points',
+              type: 'array',
+              of: [{ type: 'string' }],
+              description: 'Short feature labels shown in the milestone',
+            },
+            {
+              name: 'url',
+              title: 'URL (optional)',
+              type: 'url',
+            },
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'description' },
+          },
+        },
+      ],
+    },
+
+    // â”€â”€ ACHIEVEMENTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    {
+      name: 'achievements',
+      title: 'Achievements / Hackathons',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Achievement Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description (e.g. 1st Place)',
+              type: 'string',
+            },
+            {
+              name: 'url',
+              title: 'URL (optional)',
+              type: 'url',
+            },
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'description' },
+          },
+        },
+      ],
+    },
+  ],
+
+  // Singleton: prevent creating multiple documents
+  __experimental_actions: ['update', 'publish', 'discardChanges'],
+};
+
+
+
+================================================
 FILE: portfolio-itom/schemaTypes/awardCertificate.js
 ================================================
 export default {
@@ -1993,8 +2192,9 @@ import studioItem from './studioItem'
 import awardCertificate from './awardCertificate'
 import globalInfo from './globalInfo'
 import faq from './faq'
+import aboutProfile from './aboutProfile'
 
-export const schemaTypes = [galleryProject, studioItem, awardCertificate, globalInfo, faq]
+export const schemaTypes = [galleryProject, studioItem, awardCertificate, globalInfo, faq, aboutProfile]
 
 
 
@@ -2571,12 +2771,6 @@ FILE: public/textures/about/SOTDAYYOUNGMULTIDESIGNNOMINESS.webp
 
 ================================================
 FILE: public/textures/about/SOTDAYYOUNGMULTIGSAP.webp
-================================================
-[Binary file]
-
-
-================================================
-FILE: public/textures/about/SOTDAYYOUNGMULTIORPETRON.webp
 ================================================
 [Binary file]
 
@@ -4689,7 +4883,7 @@ const SOTD_FILES = [
   'SOTDAYYOUNGMULTICSSWINNER.webp',
   'SOTDAYYOUNGMULTIDESIGNNOMINESS.webp',
   'SOTDAYYOUNGMULTIGSAP.webp',
-  'SOTDAYYOUNGMULTIORPETRON.webp'
+  'Lamatic.webp'
 ];
 
 async function fixAwardsToSquarePOT() {
@@ -10480,7 +10674,7 @@ console.log('Modifications applied successfully.');
 ================================================
 FILE: src/components/canvas/rooms/About/InfiniteSkyManager.jsx
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x90 in position 16137: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x8f in position 29752: character maps to <undefined>
 
 
 ================================================
@@ -13924,7 +14118,7 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
     const dragDistance = useRef(0);
 
     const rotationVelocity = useRef(0);
-    const autoRotationSpeed = useRef(0.08); // Subtle continuous rotation
+    const autoRotationSpeed = useRef(0.0); // No continuous idle drift — moves only on drag/swipe
     const DRAG_SENSITIVITY = 0.006;
     const FRICTION = 0.97;
 
@@ -14010,7 +14204,7 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         }
     });
 
-    // Generate balanced 3D constellation layout for skills with real Z depth
+    // Generate vertical floating column layout for skills
     const floatingSkills = useMemo(() => {
         let seed = 42;
         const pseudoRand = () => {
@@ -14021,49 +14215,46 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         const count = activeSkills.length;
         const items = [];
 
-        // 4 Concentric Depth Shells with varied height and radius
-        const shells = [
-            { z: -4.5, count: Math.round(count * 0.22), radiusX: 3.6, radiusY: 2.0 },
-            { z: -6.8, count: Math.round(count * 0.28), radiusX: 4.6, radiusY: 2.4 },
-            { z: -9.0, count: Math.round(count * 0.28), radiusX: 5.4, radiusY: 2.8 },
-            { z: -11.2, count: count, radiusX: 6.0, radiusY: 3.1 }
-        ];
+        // Vertical cylindrical column configuration
+        const SKILLS_PER_RING = 4;
+        const ringsNeeded = Math.ceil(count / SKILLS_PER_RING);
+        const VERTICAL_SPACING = 1.45;
+        const towerRadius = 2.1 * responsiveParams.radius;
 
-        let skillIdx = 0;
-        shells.forEach((shell, sIdx) => {
-            const shellCount = sIdx === shells.length - 1 ? (count - skillIdx) : shell.count;
-            const angleStep = (Math.PI * 2) / Math.max(1, shellCount);
+        for (let i = 0; i < count; i++) {
+            const skill = activeSkills[i];
+            const ring = Math.floor(i / SKILLS_PER_RING);
+            const slot = i % SKILLS_PER_RING;
 
-            for (let i = 0; i < shellCount && skillIdx < count; i++) {
-                const skill = activeSkills[skillIdx];
-                const angle = i * angleStep + (sIdx * 0.75) + (pseudoRand() - 0.5) * 0.35;
+            // Stagger alternate rings by half an angle step for a balanced, staggered column
+            const angleStep = (Math.PI * 2) / SKILLS_PER_RING;
+            const angleOffset = (ring % 2) * (angleStep / 2);
+            const angle = slot * angleStep + angleOffset;
 
-                const x = Math.sin(angle) * shell.radiusX * responsiveParams.radius + (pseudoRand() - 0.5) * 0.5;
-                const y = Math.cos(angle) * shell.radiusY + (pseudoRand() - 0.5) * 0.5;
-                const z = shell.z + (pseudoRand() - 0.5) * 0.6;
+            // Position on the vertical column cylinder
+            const x = Math.sin(angle) * towerRadius;
+            const y = (ring - (ringsNeeded - 1) / 2) * VERTICAL_SPACING + (pseudoRand() - 0.5) * 0.2;
+            const z = Math.cos(angle) * towerRadius;
 
-                items.push({
-                    ...skill,
-                    x,
-                    y,
-                    z,
-                    baseScale: (0.85 + pseudoRand() * 0.2) * responsiveParams.scale,
-                    rotX: (pseudoRand() - 0.5) * 0.15,
-                    rotY: (pseudoRand() - 0.5) * 0.25,
-                    rotZ: (pseudoRand() - 0.5) * 0.15,
-                    driftSpeed: 0.35 + pseudoRand() * 0.35,
-                    floatAmplitude: 0.14 + pseudoRand() * 0.14,
-                    phaseOffset: pseudoRand() * Math.PI * 2,
-                    rotSpeedY: (pseudoRand() - 0.5) * 0.08
-                });
-                skillIdx++;
-            }
-        });
+            items.push({
+                ...skill,
+                x,
+                y,
+                z,
+                baseScale: (0.85 + pseudoRand() * 0.15) * responsiveParams.scale,
+                rotX: (pseudoRand() - 0.5) * 0.08,
+                rotY: angle, // Face outward from vertical column
+                rotZ: (pseudoRand() - 0.5) * 0.08,
+                driftSpeed: 0.35 + pseudoRand() * 0.35,
+                floatAmplitude: 0.12 + pseudoRand() * 0.12,
+                phaseOffset: pseudoRand() * Math.PI * 2,
+            });
+        }
 
         return items;
     }, [activeSkills, responsiveParams.radius, responsiveParams.scale]);
 
-    // --- INTERACTION: Drag to explore / rotate the floating skills constellation ---
+    // --- INTERACTION: Drag to explore / rotate the floating skills column ---
     const handlePointerDown = (e) => {
         e.stopPropagation();
         isDraggingRef.current = true;
@@ -14093,9 +14284,6 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
 
         dragDistance.current += Math.abs(deltaX) + Math.abs(deltaY);
 
-        if (Math.abs(deltaX) > 1) {
-            autoRotationSpeed.current = Math.sign(deltaX) * 0.08;
-        }
         rotationVelocity.current = deltaX * DRAG_SENSITIVITY;
         towerRef.current.rotation.y += rotationVelocity.current;
 
@@ -14116,12 +14304,12 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
         };
     }, [handlePointerUp, handlePointerMove]);
 
-    // Idle physics and continuous elegant rotation
-    useFrame((state, delta) => {
+    // Drag inertia physics (stops cleanly with friction when idle — NO continuous drift)
+    useFrame(() => {
         if (!towerRef.current) return;
 
         if (!isDraggingRef.current) {
-            towerRef.current.rotation.y += autoRotationSpeed.current * delta + rotationVelocity.current;
+            towerRef.current.rotation.y += rotationVelocity.current;
             rotationVelocity.current *= FRICTION;
 
             // Update particle refs directly for background parallax (no state re-renders)
@@ -14145,15 +14333,15 @@ const StudioRoom = ({ showRoom, onReady, isExiting, isWarmup }) => {
                 />
             )}
 
-            {/* THE FLOATING SKILLS CONSTELLATION */}
+            {/* THE FLOATING SKILLS VERTICAL COLUMN */}
             <group
                 ref={towerRef}
-                position={[0, 0, 0]}
+                position={[0, 0.2, -8.0]}
                 onPointerDown={handlePointerDown}
             >
                 {/* Invisible Hit Cylinder for easier drag/rotate interaction */}
                 <mesh visible={false}>
-                    <cylinderGeometry args={[8, 8, 16, 16]} />
+                    <cylinderGeometry args={[3.2, 3.2, 16, 16]} />
                     <meshBasicMaterial color="#e0e0e0" />
                 </mesh>
 
@@ -14265,21 +14453,17 @@ const FloatingSkillBadge = memo(({ item, paintOnBeforeCompile }) => {
         const currentScale = item.baseScale * hoverScale.current;
         mesh.scale.set(currentScale, currentScale, currentScale);
 
-        // Gentle independent floating movement (derived from FloatingCodeParticles principles)
+        // Gentle independent floating movement along Y axis only
         const floatY = Math.sin(time * item.driftSpeed + item.phaseOffset) * item.floatAmplitude;
-        const floatX = Math.cos(time * item.driftSpeed * 0.65 + item.phaseOffset) * (item.floatAmplitude * 0.4);
-        const floatZ = Math.sin(time * item.driftSpeed * 0.45 + item.phaseOffset * 1.3) * (item.floatAmplitude * 0.35);
 
-        mesh.position.set(
-            item.x + floatX,
-            item.y + floatY,
-            item.z + floatZ
-        );
+        mesh.position.x = item.x;
+        mesh.position.y = item.y + floatY;
+        mesh.position.z = item.z;
 
-        // Subtle continuous rotation + gentle hover tilt
-        mesh.rotation.x = item.rotX + Math.sin(time * 0.3 + item.phaseOffset) * 0.06;
-        mesh.rotation.y = item.rotY + time * item.rotSpeedY + hoverRotBoost.current;
-        mesh.rotation.z = item.rotZ + Math.cos(time * 0.25 + item.phaseOffset) * 0.06;
+        // Subtle organic tilt + gentle hover tilt (in place)
+        mesh.rotation.x = item.rotX + Math.sin(time * 0.3 + item.phaseOffset) * 0.04;
+        mesh.rotation.y = item.rotY + hoverRotBoost.current;
+        mesh.rotation.z = item.rotZ + Math.cos(time * 0.25 + item.phaseOffset) * 0.04;
 
         // Brighten ring border on hover
         if (ringMaterial) {
@@ -16229,7 +16413,7 @@ export default NavigationUI;
 FILE: src/components/ui/ScreenReaderOverlay.jsx
 ================================================
 import { useScene } from '../../context/SceneContext';
-import { useGalleryProjects, useStudioContent, useAwards } from '../../hooks/useSanityData';
+import { useGalleryProjects, useStudioContent, useAwards, useAboutProfile } from '../../hooks/useSanityData';
 import '../../styles/ScreenReaderOverlay.scss';
 
 /**
@@ -16246,6 +16430,7 @@ const ScreenReaderOverlay = () => {
     const projects = useGalleryProjects();
     const studio = useStudioContent();
     const awards = useAwards();
+    const aboutProfile = useAboutProfile();
 
     return (
         <div className="sr-overlay" role="complementary" aria-label="Accessible navigation for 3D portfolio">
@@ -16306,12 +16491,74 @@ const ScreenReaderOverlay = () => {
                         {/* Room-specific content descriptions */}
                         {currentRoom === 'about' && (
                             <div aria-label="About room content">
-                                <h3>About Me</h3>
-                                <p>This room contains my personal story, awards, journey milestones, and technology skills displayed as interactive balloons.</p>
+                                <h3>About {aboutProfile?.name || 'Durvankur Joshi'}</h3>
+                                {aboutProfile?.bio && <p>{aboutProfile.bio}</p>}
 
+                                {/* Education */}
+                                {aboutProfile?.education && aboutProfile.education.length > 0 && (
+                                    <section>
+                                        <h4>Education</h4>
+                                        <ul>
+                                            {aboutProfile.education.map((edu, i) => (
+                                                <li key={i}>
+                                                    <strong>{edu.degree}</strong> â€” {edu.institution}
+                                                    {edu.score && ` (${edu.score})`}
+                                                    {edu.period && `, ${edu.period}`}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Journey Highlights / Projects */}
+                                {aboutProfile?.highlights && aboutProfile.highlights.length > 0 && (
+                                    <section>
+                                        <h4>Projects</h4>
+                                        <ul>
+                                            {aboutProfile.highlights.filter(h => h.type === 'project').map((h, i) => (
+                                                <li key={i}><strong>{h.title}</strong>{h.description && ` â€” ${h.description}`}</li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Open Source */}
+                                {aboutProfile?.openSource && aboutProfile.openSource.length > 0 && (
+                                    <section>
+                                        <h4>Open Source</h4>
+                                        <ul>
+                                            {aboutProfile.openSource.map((oss, i) => (
+                                                <li key={i}>
+                                                    <strong>{oss.title}</strong>{oss.description && ` â€” ${oss.description}`}
+                                                    {oss.features && oss.features.length > 0 && (
+                                                        <ul>{oss.features.map((f, fi) => <li key={fi}>{f}</li>)}</ul>
+                                                    )}
+                                                    {oss.url && <a href={oss.url}>View contribution</a>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Achievements */}
+                                {aboutProfile?.achievements && aboutProfile.achievements.length > 0 && (
+                                    <section>
+                                        <h4>Achievements</h4>
+                                        <ul>
+                                            {aboutProfile.achievements.map((a, i) => (
+                                                <li key={i}>
+                                                    <strong>{a.title}</strong>{a.description && ` â€” ${a.description}`}
+                                                    {a.url && <a href={a.url}>View</a>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Awards from awardCertificate Sanity schema */}
                                 {awards && (
                                     <section>
-                                        <h4>My Awards</h4>
+                                        <h4>Awards</h4>
                                         <ul>
                                             {awards.sotd && awards.sotd.items && awards.sotd.items.map((a, i) => (
                                                 <li key={i}>{a.label} - {a.date} {a.url && <a href={a.url}>View</a>}</li>
@@ -16630,7 +16877,7 @@ export const ABOUT_TEXTURES = [
     // Award images (for overlay)
     '/textures/about/SOTDAYYOUNGMULTICSSWINNER.webp',
     '/textures/about/SOTDAYYOUNGMULTIGSAP.webp',
-    '/textures/about/SOTDAYYOUNGMULTIORPETRON.webp',
+    '/textures/about/Lamatic.webp',
     '/textures/about/SOTDAYYOUNGMULTIDESIGNNOMINESS.webp',
     // Journey islands
     '/textures/about/uowyspa.webp',
@@ -18388,7 +18635,7 @@ export default useParallax;
 ================================================
 FILE: src/hooks/useSanityData.js
 ================================================
-Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x8f in position 7302: character maps to <undefined>
+Error reading file with 'cp1252': 'charmap' codec can't decode byte 0x8f in position 10079: character maps to <undefined>
 
 
 ================================================

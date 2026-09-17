@@ -193,7 +193,7 @@ export const ABOUT_TEXTURES = [
     // Award images (for overlay)
     '/textures/about/SOTDAYYOUNGMULTICSSWINNER.webp',
     '/textures/about/SOTDAYYOUNGMULTIGSAP.webp',
-    '/textures/about/SOTDAYYOUNGMULTIORPETRON.webp',
+    '/textures/about/Lamatic.webp',
     '/textures/about/SOTDAYYOUNGMULTIDESIGNNOMINESS.webp',
     // Journey islands
     '/textures/about/uowyspa.webp',

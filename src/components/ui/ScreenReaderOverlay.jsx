@@ -1,5 +1,5 @@
 import { useScene } from '../../context/SceneContext';
-import { useGalleryProjects, useStudioContent, useAwards } from '../../hooks/useSanityData';
+import { useGalleryProjects, useStudioContent, useAwards, useAboutProfile } from '../../hooks/useSanityData';
 import '../../styles/ScreenReaderOverlay.scss';
 
 /**
@@ -16,6 +16,7 @@ const ScreenReaderOverlay = () => {
     const projects = useGalleryProjects();
     const studio = useStudioContent();
     const awards = useAwards();
+    const aboutProfile = useAboutProfile();
 
     return (
         <div className="sr-overlay" role="complementary" aria-label="Accessible navigation for 3D portfolio">
@@ -76,12 +77,74 @@ const ScreenReaderOverlay = () => {
                         {/* Room-specific content descriptions */}
                         {currentRoom === 'about' && (
                             <div aria-label="About room content">
-                                <h3>About Me</h3>
-                                <p>This room contains my personal story, awards, journey milestones, and technology skills displayed as interactive balloons.</p>
+                                <h3>About {aboutProfile?.name || 'Durvankur Joshi'}</h3>
+                                {aboutProfile?.bio && <p>{aboutProfile.bio}</p>}
 
+                                {/* Education */}
+                                {aboutProfile?.education && aboutProfile.education.length > 0 && (
+                                    <section>
+                                        <h4>Education</h4>
+                                        <ul>
+                                            {aboutProfile.education.map((edu, i) => (
+                                                <li key={i}>
+                                                    <strong>{edu.degree}</strong> — {edu.institution}
+                                                    {edu.score && ` (${edu.score})`}
+                                                    {edu.period && `, ${edu.period}`}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Journey Highlights / Projects */}
+                                {aboutProfile?.highlights && aboutProfile.highlights.length > 0 && (
+                                    <section>
+                                        <h4>Projects</h4>
+                                        <ul>
+                                            {aboutProfile.highlights.filter(h => h.type === 'project').map((h, i) => (
+                                                <li key={i}><strong>{h.title}</strong>{h.description && ` — ${h.description}`}</li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Open Source */}
+                                {aboutProfile?.openSource && aboutProfile.openSource.length > 0 && (
+                                    <section>
+                                        <h4>Open Source</h4>
+                                        <ul>
+                                            {aboutProfile.openSource.map((oss, i) => (
+                                                <li key={i}>
+                                                    <strong>{oss.title}</strong>{oss.description && ` — ${oss.description}`}
+                                                    {oss.features && oss.features.length > 0 && (
+                                                        <ul>{oss.features.map((f, fi) => <li key={fi}>{f}</li>)}</ul>
+                                                    )}
+                                                    {oss.url && <a href={oss.url}>View contribution</a>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Achievements */}
+                                {aboutProfile?.achievements && aboutProfile.achievements.length > 0 && (
+                                    <section>
+                                        <h4>Achievements</h4>
+                                        <ul>
+                                            {aboutProfile.achievements.map((a, i) => (
+                                                <li key={i}>
+                                                    <strong>{a.title}</strong>{a.description && ` — ${a.description}`}
+                                                    {a.url && <a href={a.url}>View</a>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Awards from awardCertificate Sanity schema */}
                                 {awards && (
                                     <section>
-                                        <h4>My Awards</h4>
+                                        <h4>Awards</h4>
                                         <ul>
                                             {awards.sotd && awards.sotd.items && awards.sotd.items.map((a, i) => (
                                                 <li key={i}>{a.label} - {a.date} {a.url && <a href={a.url}>View</a>}</li>
